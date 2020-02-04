@@ -3,12 +3,12 @@
 require './authentication/authenticator'
 
 RSpec.describe Authentication::Authenticator do
-  describe '#authenticate' do
+  describe '#call' do
     let(:username) { 'username' }
     let(:password) { 'password' }
     let(:authenticator) { Authentication::Authenticator.new(username: username, password: password) }
 
-    subject { authenticator.authenticate }
+    subject { authenticator.call }
 
     context 'when passwords match' do
       let(:mock_user) { instance_double('User') }

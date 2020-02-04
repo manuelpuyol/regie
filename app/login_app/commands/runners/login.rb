@@ -20,7 +20,7 @@ module App
           private
 
           def login
-            authenticator.authenticate
+            authenticator.call
 
             if user.nil?
               @logger.print 'Login failed'

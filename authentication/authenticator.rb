@@ -9,7 +9,7 @@ module Authentication
       @password = password
     end
 
-    def authenticate
+    def call
       CurrentUserSingleton.instance.set(user) if password_match?
     end
 

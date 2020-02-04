@@ -11,8 +11,8 @@ RSpec.describe Registration::CurrentCoursesFetcher do
       allow(Authentication::CurrentUserSingleton).to receive_message_chain(:instance, :get).and_return(mock_user)
     end
 
-    it 'sets @user as the singleton current user' do
-      expect(subject.instance_variable_get('@user')).to eq(mock_user)
+    it 'sets @student as the singleton current user' do
+      expect(subject.instance_variable_get('@student')).to eq(mock_user)
     end
   end
 
