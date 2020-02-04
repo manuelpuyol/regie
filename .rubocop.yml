@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+    - login/runner.rb
+
+Style/Documentation:
+  Enabled: false
+
+GlobalVars:
+  AllowedVariables:
+    - $running
