@@ -2,6 +2,7 @@
 
 require './app/student_app/runner'
 require './app/commands/runners/base'
+require './authentication/authenticator'
 
 module App
   module LoginApp
@@ -18,9 +19,12 @@ module App
           private
 
           def login
-            # TODO: Create real login service
             LoginApp::Runner.stop
-            StudentApp::Runner.new.start
+            StudentApp::Runner.new.start if authenticator.password_match?
+          end
+
+          def authenticator
+            Authentication::Authenticator.new(@username, @password)
           end
 
           def read_username
