@@ -17,7 +17,7 @@ RSpec.describe Registration::Laboratory do
     let(:new_name) { 'new name' }
 
     it 'changes the laboratory name' do
-      laboratory = described_class.new(name: old_name) 
+      laboratory = described_class.new(name: old_name)
       laboratory.name = new_name
 
       expect(laboratory.name).to eq(new_name)

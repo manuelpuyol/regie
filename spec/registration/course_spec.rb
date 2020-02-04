@@ -17,7 +17,7 @@ RSpec.describe Registration::Course do
     let(:new_name) { 'new name' }
 
     it 'changes the course name' do
-      course = described_class.new(name: old_name) 
+      course = described_class.new(name: old_name)
       course.name = new_name
 
       expect(course.name).to eq(new_name)
