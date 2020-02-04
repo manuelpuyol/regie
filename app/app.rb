@@ -3,7 +3,7 @@
 require_relative 'login_app/runner'
 
 module App
-  class Runner
+  class App
     def initialize
       $running = true
     end

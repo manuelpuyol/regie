@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 require './app/student_app/runner'
-require_relative 'base'
+require './app/commands/runners/base'
 
 module App
   module LoginApp
     module Commands
       module Runners
-        class Login < Base
+        class Login < App::Commands::Runners::Base
           def run
             read_username
             read_password
@@ -20,7 +20,7 @@ module App
           def login
             # TODO: Create real login service
             LoginApp::Runner.stop
-            App::StudentApp::Runner.new.start
+            StudentApp::Runner.new.start
           end
 
           def read_username

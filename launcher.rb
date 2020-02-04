@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'app/runner'
+require_relative 'app/app'
 
-app = App::Runner.new
+app = App::App.new
 app.start
