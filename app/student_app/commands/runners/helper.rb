@@ -8,10 +8,11 @@ module App
       module Runners
         class Helper < App::Commands::Runners::Base
           def run
-            @logger.print "==================================================\n"
-            @logger.print "Here are the available commands you may use:\n"
+            @logger.print "\nYou are logged in as a student"
+            @logger.print "\n==============================================\n\n"
+            @logger.print "Here are the available commands you may use:\n\n"
             @logger.print "#{cmd(:quit)} - quits the application"
-            @logger.print "#{cmd(:help)} - prints this help message\n"
+            @logger.print "#{cmd(:help)} - prints this help message\n\n"
           end
 
           private

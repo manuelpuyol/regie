@@ -8,13 +8,13 @@ module App
       module Runners
         class Helper < App::Commands::Runners::Base
           def run
-            @logger.print "\n\nWelcome to MPCS 51410 REGIE System!"
+            @logger.print "\nWelcome to MPCS 51410 REGIE System!"
             @logger.print 'This is a program developed by Manuel Puyol'
-            @logger.print "==================================================\n"
-            @logger.print "Here are the available commands you may use:\n"
+            @logger.print "\n==============================================\n\n"
+            @logger.print "Here are the available commands you may use:\n\n"
             @logger.print "#{cmd(:login)} - starts login procedure"
             @logger.print "#{cmd(:quit)} - quits the application"
-            @logger.print "#{cmd(:help)} - prints this help message\n"
+            @logger.print "#{cmd(:help)} - prints this help message\n\n"
           end
 
           private
