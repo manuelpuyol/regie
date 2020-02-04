@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './login_app/runner'
+require_relative 'login_app/runner'
 
 module App
   class Runner
