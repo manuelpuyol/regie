@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require './authentication/current_user'
+require_relative 'course'
 
 module Registration
   class CurrentCoursesFetcher
@@ -11,9 +12,9 @@ module Registration
     # TODO: Actually query courses
     def call
       [
-        'MPCS 51044 C/C++ for Advanced Programmers',
-        'MPCS 53110 Foundations of Data Analysis',
-        'MPCS 514101 Object Oriented Programming'
+        Course.new(name: 'MPCS 51044 C/C++ for Advanced Programmers'),
+        Course.new(name: 'MPCS 53110 Foundations of Data Analysis'),
+        Course.new(name: 'MPCS 514101 Object Oriented Programming')
       ]
     end
   end

@@ -8,3 +8,22 @@ Style/Documentation:
 GlobalVars:
   AllowedVariables:
     - $running
+
+Layout/ClassStructure:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Layout/LineLenght:
+  Max: 120
