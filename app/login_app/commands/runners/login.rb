@@ -3,6 +3,7 @@
 require './app/student_app/runner'
 require './app/commands/runners/base'
 require './authentication/authenticator'
+require './authentication/current_user'
 
 module App
   module LoginApp
@@ -19,8 +20,18 @@ module App
           private
 
           def login
-            LoginApp::Runner.stop
-            StudentApp::Runner.new.start if authenticator.password_match?
+            authenticator.authenticate
+
+            if user.nil?
+              @logger.print 'Login failed'
+            else
+              LoginApp::Runner.stop
+              StudentApp::Runner.new(user).start
+            end
+          end
+
+          def user
+            Authentication::CurrentUser.instance.get
           end
 
           def authenticator

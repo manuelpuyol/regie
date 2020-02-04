@@ -7,6 +7,11 @@ require_relative 'commands/commands'
 module App
   module StudentApp
     class Runner < App::BaseRunner
+      def initialize(user)
+        @user = user
+        super()
+      end
+
       private
 
       def app_name

@@ -4,10 +4,6 @@ require_relative 'login_app/runner'
 
 module App
   class App
-    def initialize
-      $running = true
-    end
-
     def start
       run_login
     end
