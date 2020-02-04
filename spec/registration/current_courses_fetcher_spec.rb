@@ -8,7 +8,7 @@ RSpec.describe Registration::CurrentCoursesFetcher do
     subject { described_class.new }
 
     before do
-      allow(Authentication::CurrentUser).to receive_message_chain(:instance, :get).and_return(mock_user)
+      allow(Authentication::CurrentUserSingleton).to receive_message_chain(:instance, :get).and_return(mock_user)
     end
 
     it 'sets @user as the singleton current user' do

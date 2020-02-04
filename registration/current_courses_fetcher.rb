@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require './authentication/current_user'
+require './authentication/current_user_singleton'
 require_relative 'course'
 
 module Registration
   class CurrentCoursesFetcher
     def initialize
-      @user = Authentication::CurrentUser.instance.get
+      @user = Authentication::CurrentUserSingleton.instance.get
     end
 
     # TODO: Actually query courses

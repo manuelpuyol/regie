@@ -3,7 +3,7 @@
 require './app/student_app/runner'
 require './app/commands/runners/base'
 require './authentication/authenticator'
-require './authentication/current_user'
+require './authentication/current_user_singleton'
 
 module App
   module LoginApp
@@ -31,11 +31,11 @@ module App
           end
 
           def user
-            Authentication::CurrentUser.instance.get
+            Authentication::CurrentUserSingleton.instance.get
           end
 
           def authenticator
-            Authentication::Authenticator.new(@username, @password)
+            Authentication::Authenticator.new(username: @username, password: @password)
           end
 
           def read_username

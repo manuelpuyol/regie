@@ -4,8 +4,6 @@ require 'singleton'
 
 module Authentication
   class CurrentUser
-    include Singleton
-
     def initialize
       @user = nil
     end
