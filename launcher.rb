@@ -3,5 +3,9 @@
 require 'pry'
 require_relative 'app/app'
 
-app = App::App.new
-app.start
+begin
+  app = App::App.new
+  app.start
+rescue Interrupt
+  puts "\nStopping now"
+end
