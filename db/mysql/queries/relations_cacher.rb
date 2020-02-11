@@ -3,7 +3,7 @@
 module DB
   module MySQL
     module Queries
-      module RelationsCacher
+      class RelationsCacher
         def cache_relations(model, includes, results)
           return if includes.nil?
 

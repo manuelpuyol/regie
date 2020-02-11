@@ -3,23 +3,28 @@
 module DB
   module MySQL
     module Queries
-      module QueryBuilder
+      class Builder
+        def initialize(table_name:, column_names:)
+          @table_name = table_name
+          @column_names = column_names
+        end
+
         def generate_query(includes:, limit: nil)
           include_sql_hash = generate_includes(includes)
           select_fields = include_sql_hash[:select] << select_columns_from_model(self)
 
-          select_statement = "SELECT #{select_fields.join(', ')} FROM #{table_name}"
+          select_statement = "SELECT #{select_fields.join(', ')} FROM #{@table_name}"
           join_statements = include_sql_hash[:join].join(' ')
 
           "#{select_statement} #{join_statements} #{limit_statement(limit)}"
         end
 
         def find_statement(id)
-          "WHERE #{table_name}.id = #{id.to_i}"
+          "WHERE #{@table_name}.id = #{id.to_i}"
         end
 
         def first_statement
-          "ORDER BY #{table_name}.id ASC LIMIT 1"
+          "ORDER BY #{@table_name}.id ASC LIMIT 1"
         end
 
         def where_statement(args)
@@ -40,25 +45,25 @@ module DB
         end
 
         def generate_update_query(id, attrs)
-          "UPDATE #{table_name} SET #{set_statement(attrs)} WHERE #{table_name}.id = #{id.to_i}"
+          "UPDATE #{@table_name} SET #{set_statement(attrs)} WHERE #{@table_name}.id = #{id.to_i}"
         end
 
         def generate_create_query(attrs)
-          sorted_columns = column_names.sort - ['id']
+          sorted_columns = @column_names.sort - ['id']
           columns = sorted_columns.join(', ')
           column_values = sorted_columns.map do |col|
-            if col == 'created_at' || col == 'updated_at'
+            if %w[created_at updated_at].include?(col)
               'NOW()'
             else
               sanitize_sql_for_assignment(['?', attrs[col]])
             end
           end.join(', ')
 
-          "INSERT INTO #{table_name} (#{columns}) VALUES (#{column_values}) RETURNING id"
+          "INSERT INTO #{@table_name} (#{columns}) VALUES (#{column_values}) RETURNING id"
         end
 
         def generate_destroy_query(id)
-          "DELETE FROM #{table_name} WHERE id = #{id.to_i}"
+          "DELETE FROM #{@table_name} WHERE id = #{id.to_i}"
         end
 
         private
@@ -114,7 +119,7 @@ module DB
 
           {
             select: select_columns_from_model(relation_model, table_alias),
-            join: ["LEFT JOIN #{relation_table} AS #{table_alias} ON #{table_alias}.#{column_name} = #{table_name}.id"]
+            join: ["LEFT JOIN #{relation_table} AS #{table_alias} ON #{table_alias}.#{column_name} = #{@table_name}.id"]
           }
         end
 
@@ -140,7 +145,7 @@ module DB
 
           {
             select: select_columns_from_model(relation_model, table_alias),
-            join: ["LEFT JOIN #{relation_table} AS #{table_alias} ON #{table_alias}.id = #{table_name}.#{column_name}"]
+            join: ["LEFT JOIN #{relation_table} AS #{table_alias} ON #{table_alias}.id = #{@table_name}.#{column_name}"]
           }
         end
 
@@ -154,11 +159,11 @@ module DB
           kwargs.map do |key, value|
             case value
             when Array
-              "#{table_name}.#{key} #{sanitize_sql_for_conditions(value)}"
+              "#{@table_name}.#{key} #{sanitize_sql_for_conditions(value)}"
             when NilClass
-              "#{table_name}.#{key} IS NULL"
+              "#{@table_name}.#{key} IS NULL"
             else
-              sanitize_sql_for_conditions(["#{table_name}.#{key} = ?", value])
+              sanitize_sql_for_conditions(["#{@table_name}.#{key} = ?", value])
             end
           end.join(' AND ')
         end

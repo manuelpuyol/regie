@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+module DB
+  module MySQL
+    module Queries
+      class First < Base
+        def call
+          query = "#{builder.generate_query(includes: @includes)} #{builder.first_statement}"
+          sql_result = connection.execute(query)
+
+          caster.cast_sql_results(sql_result.to_a, @includes).first
+        end
+      end
+    end
+  end
+end
