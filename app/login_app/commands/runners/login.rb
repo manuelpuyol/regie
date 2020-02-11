@@ -24,9 +24,13 @@ module App
 
             if user.nil?
               @logger.print 'Login failed'
-            else
+            elsif user.student?
               LoginApp::Runner.stop
               StudentApp::Runner.new(user).start
+            elsif user.staff?
+              @logger.print 'Staff App still under construction'
+            elsif user.admin?
+              @logger.print 'Admin App still under construction'
             end
           end
 
