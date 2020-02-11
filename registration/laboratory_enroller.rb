@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require './authentication/current_user_singleton'
+require_relative 'current_student'
 
 module Registration
   class LaboratoryEnroller
     def initialize(laboratory:)
       @laboratory = laboratory
-      @student = Authentication::CurrentUserSingleton.instance.get
+      @student = CurrentStudent.instance.get
     end
 
     # TODO: Actually enroll a student in a laboratory

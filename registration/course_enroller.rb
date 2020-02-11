@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './authentication/current_user_singleton'
+require_relative 'current_student'
 require_relative 'current_courses_fetcher'
 require_relative 'prerequisites_checker'
 require_relative 'laboratories_enroller'
@@ -11,7 +11,7 @@ module Registration
 
     def initialize(course:)
       @course = course
-      @student = Authentication::CurrentUserSingleton.instance.get
+      @student = CurrentStudent.instance.get
     end
 
     # TODO: Actually enroll a student in a course
