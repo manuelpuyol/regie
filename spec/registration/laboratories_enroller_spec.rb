@@ -10,7 +10,7 @@ RSpec.describe Registration::LaboratoriesEnroller do
     subject { described_class.new(course: mock_course) }
 
     before do
-      allow(Registration::CurrentStudent).to receive_message_chain(:instance, :get).and_return(mock_student)
+      allow(Registration::CurrentStudentSingleton).to receive_message_chain(:instance, :get).and_return(mock_student)
     end
 
     it 'sets @student as the singleton current user' do
