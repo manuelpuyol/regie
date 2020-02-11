@@ -6,9 +6,13 @@ module DB
   module MySQL
     module Queries
       class ModelCaster
+        def initialize(record_class:)
+          @record_class = record_class
+        end
+
         def cast_sql_results(results, includes)
           models = primary_model_results(results).map do |result|
-            cast_to_model(self, table_name, result)
+            cast_to_model(@record_class, @record_class.table_name, result)
           end
 
           models.each do |model|
@@ -21,7 +25,7 @@ module DB
         private
 
         def primary_model_results(results)
-          results.uniq { |result| result["#{table_name}_id"] }
+          results.uniq { |result| result["#{@record_class.table_name}_id"] }
         end
 
         def cast_to_model(klass, table_name, result)

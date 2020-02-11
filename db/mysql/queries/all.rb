@@ -8,7 +8,7 @@ module DB
       class All < Base
         def all
           query = builder.generate_query(includes: @includes, limit: @limit)
-          sql_result = connection.execute(query)
+          sql_result = connection.query(query)
 
           caster.cast_sql_results(sql_result.to_a, @includes)
         end

@@ -13,8 +13,7 @@ module DB
       def self.included(base)
         base.class_eval do
           extend ClassMethods
-          class_attribute :relations, instance_writer: false
-          self.relations = {}
+          @relations = {}
         end
       end
 
@@ -60,7 +59,7 @@ module DB
         def add_relation(name, type:, class_name:, foreign_key: nil, polymorphic: false, through: nil, dependent: nil)
           relation_klass = ClassInferrer.infer(name, class_name, polymorphic)
 
-          self.relations = relations.dup
+          @relations = relations.dup
           relations[name] = {
             type: RELATION_TYPES[type],
             klass: relation_klass,

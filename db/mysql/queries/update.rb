@@ -9,7 +9,7 @@ module DB
         def call
           query = builder.generate_update_query(@id, @attrs)
 
-          connection.execute(query)
+          connection.query(query)
         end
       end
     end

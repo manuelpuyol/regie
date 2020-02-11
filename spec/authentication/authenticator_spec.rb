@@ -4,9 +4,9 @@ require './authentication/authenticator'
 
 RSpec.describe Authentication::Authenticator do
   describe '#call' do
-    let(:username) { 'username' }
+    let(:email) { 'email' }
     let(:password) { 'password' }
-    let(:authenticator) { Authentication::Authenticator.new(username: username, password: password) }
+    let(:authenticator) { Authentication::Authenticator.new(email: email, password: password) }
 
     subject { authenticator.call }
 

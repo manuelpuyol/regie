@@ -8,7 +8,7 @@ module DB
       class Where < Base
         def call
           query = "#{builder.generate_query(includes: @includes)} WHERE #{builder.where_statement(@args)} #{builder.limit_statement(@limit)}"
-          sql_result = connection.execute(query)
+          sql_result = connection.query(query)
 
           caster.cast_sql_results(sql_result.to_a, @includes)
         end

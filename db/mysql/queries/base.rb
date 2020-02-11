@@ -8,9 +8,8 @@ module DB
   module MySQL
     module Queries
       class Base
-        def initialize(table_name:, column_names:, includes: nil, id: nil, limit: nil, attrs: nil, args: nil)
-          @table_name = table_name
-          @column_names = column_names
+        def initialize(record_class:, includes: nil, id: nil, limit: nil, attrs: nil, args: nil)
+          @record_class = record_class
           @includes = includes
           @id = id
           @limit = limit
@@ -21,15 +20,15 @@ module DB
         private
 
         def connection
-          DB::MySQL::ConnectionSingleton.get
+          DB::MySQL::ConnectionSingleton.instance.get
         end
 
         def builder
-          @builder ||= Builder.new(table_name: @table_name, column_names: @column_names)
+          @builder ||= Builder.new(record_class: @record_class)
         end
 
         def caster
-          @caster ||= ModelCaster.new
+          @caster ||= ModelCaster.new(record_class: @record_class)
         end
       end
     end

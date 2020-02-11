@@ -9,7 +9,7 @@ module DB
         def call
           query = builder.generate_create_query(@attrs)
 
-          sql_result = connection.execute(query)
+          sql_result = connection.query(query)
 
           id = sql_result.to_a.first['id']
           Find.new(id, includes: @includes).call

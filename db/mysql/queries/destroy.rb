@@ -9,7 +9,7 @@ module DB
         def call
           query = builder.generate_destroy_query(id)
 
-          connection.execute(query)
+          connection.query(query)
         end
       end
     end

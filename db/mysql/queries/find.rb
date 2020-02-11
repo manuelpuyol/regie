@@ -8,7 +8,7 @@ module DB
       class Find < Base
         def call
           query = "#{builder.generate_query(includes: @includes)} #{builder.find_statement(@id)}"
-          sql_result = connection.execute(query)
+          sql_result = connection.query(query)
 
           caster.cast_sql_results(sql_result.to_a, @includes).first
         end

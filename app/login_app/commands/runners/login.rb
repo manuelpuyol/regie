@@ -11,7 +11,7 @@ module App
       module Runners
         class Login < App::Commands::Runners::Base
           def run
-            read_username
+            read_email
             read_password
 
             login
@@ -35,12 +35,12 @@ module App
           end
 
           def authenticator
-            Authentication::Authenticator.new(username: @username, password: @password)
+            Authentication::Authenticator.new(email: @email, password: @password)
           end
 
-          def read_username
-            print '[LoginApp] username: '
-            @username = @logger.get
+          def read_email
+            print '[LoginApp] email: '
+            @email = @logger.get
           end
 
           def read_password

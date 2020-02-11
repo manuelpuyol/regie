@@ -6,14 +6,15 @@ module DB
   module MySQL
     module Queries
       class Builder
-        def initialize(table_name:, column_names:)
-          @table_name = table_name
-          @column_names = column_names
+        def initialize(record_class:)
+          @record_class = record_class
+          @table_name = record_class.table_name
+          @column_names = record_class.column_names
         end
 
         def generate_query(includes:, limit: nil)
           include_sql_hash = generate_includes(includes)
-          select_fields = include_sql_hash[:select] << select_columns_from_model(self)
+          select_fields = include_sql_hash[:select] << select_columns_from_model(@record_class)
 
           select_statement = "SELECT #{select_fields.join(', ')} FROM #{@table_name}"
           join_statements = include_sql_hash[:join].join(' ')
@@ -32,16 +33,16 @@ module DB
         def where_statement(args)
           case args
           when Hash
-            sanitize_sql_for_conditions(hash_where_statement(args))
-          when String, Array
-            sanitize_sql_for_conditions(args)
+            hash_where_statement(args)
+          when String
+            args
           else
             raise ArgumentError, "Unexpected argument type #{args.class}"
           end
         end
 
         def limit_statement(limit)
-          return '' if limit.blank?
+          return '' if limit.nil?
 
           "LIMIT #{limit.to_i}"
         end
@@ -57,7 +58,7 @@ module DB
             if %w[created_at updated_at].include?(col)
               'NOW()'
             else
-              sanitize_sql_for_assignment(['?', attrs[col]])
+              attrs[col]
             end
           end.join(', ')
 
@@ -75,7 +76,7 @@ module DB
             if value.nil?
               "#{key} = NULL"
             else
-              sanitize_sql_for_conditions(["#{key} = ?", value])
+              "#{key} = #{value}"
             end
           end.join(', ')
 
@@ -101,7 +102,7 @@ module DB
 
           case relation[:type]
           when DB::MySQL::Relations::RELATION_TYPES[:has_many]
-            if relation[:through].blank?
+            if relation[:through].nil?
               build_has_many_join(relation)
             else
               build_has_many_through_join(relation)
@@ -161,11 +162,18 @@ module DB
           kwargs.map do |key, value|
             case value
             when Array
-              "#{@table_name}.#{key} #{sanitize_sql_for_conditions(value)}"
+              if value.first.is_a?(String)
+                str_values = value.map { |v| "'#{v}'" }
+                "#{@table_name}.#{key} IN (#{str_values.join(', ')})}"
+              else
+                "#{@table_name}.#{key} IN (#{value.join(', ')})}"
+              end
             when NilClass
               "#{@table_name}.#{key} IS NULL"
+            when String
+              "#{@table_name}.#{key} = '#{value}'"
             else
-              sanitize_sql_for_conditions(["#{@table_name}.#{key} = ?", value])
+              "#{@table_name}.#{key} = #{value}"
             end
           end.join(' AND ')
         end

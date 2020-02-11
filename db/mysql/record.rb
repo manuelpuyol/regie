@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_support/inflector'
 require_relative 'queries/all'
 require_relative 'queries/create'
 require_relative 'queries/destroy'
@@ -12,11 +13,10 @@ module DB
   module MySQL
     class Record
       attr_accessor :id
+      include Relations
 
-      def self.included(base)
-        base.class_eval do
-          include Relations
-        end
+      def initialize(attrs = {})
+        assign_attributes(attrs)
       end
 
       def reload(includes: nil)
@@ -38,49 +38,78 @@ module DB
         false
       end
 
-      def assign_attributes(attrs)
-        # TODO
+      def assign_attributes(attrs = {})
+        self.class.column_names.each do |col|
+          instance_variable_set("@#{col}", attrs[col])
+        end
       end
 
       class << self
         def all(includes: nil, limit: nil)
-          Queries::All.new(includes: includes, limit: limit).call
+          Queries::All.new(
+            record_class: self,
+            includes: includes,
+            limit: limit
+          ).call
         end
 
         def create(attrs, includes: nil)
-          Queries::Create.new(attrs, includes: includes).call
+          Queries::Create.new(
+            record_class: self,
+            attrs: attrs,
+            includes: includes
+          ).call
         end
 
         def destroy(id)
-          Queries::Destroy.new(id).call
+          Queries::Destroy.new(
+            record_class: self,
+            id: id
+          ).call
         end
 
         def find(id, includes: nil)
-          Queries::Find.new(id, includes: includes).call
+          Queries::Find.new(
+            record_class: self,
+            id: id,
+            includes: includes
+          ).call
         end
 
         def first(includes: nil)
-          Queries::First.new(includes: includes).call
+          Queries::First.new(
+            record_class: self,
+            includes: includes
+          ).call
         end
 
         def update(id, attrs)
-          Queries::Update.new(id, attrs).call
+          Queries::Update.new(
+            record_class: self,
+            id: id,
+            attrs: attrs
+          ).call
         end
 
         def where(args, includes: nil, limit: nil)
-          Queries::Where.new(args, includes: includes, limit: limit).call
+          Queries::Where.new(
+            record_class: self,
+            args: args,
+            includes: includes,
+            limit: limit
+          ).call
+        end
+
+        def table_name
+          name.split('::').last.downcase.pluralize
+        end
+
+        def column_names
+          []
         end
       end
 
       private
-
-      def table_name
-        raise NotImplementedError
-      end
-
-      def column_names
-        raise NotImplementedError
-      end
 
       def destroy_dependents
         dependent_relations.each do |name, _relation|

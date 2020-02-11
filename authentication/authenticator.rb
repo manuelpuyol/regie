@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require_relative 'current_user_singleton'
+require_relative 'user'
 
 module Authentication
   class Authenticator
-    def initialize(username:, password:)
-      @username = username
+    def initialize(email:, password:)
+      @email = email
       @password = password
     end
 
@@ -15,14 +16,12 @@ module Authentication
 
     private
 
-    # TODO: actually check password
     def password_match?
-      true
+      !user.nil? && user.password == @password
     end
 
-    # TODO: get a user
     def user
-      true
+      @user ||= User.where(email: @email).first
     end
   end
 end
