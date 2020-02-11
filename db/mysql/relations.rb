@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'class_inferrer'
+
 module DB
   module MySQL
     module Relations

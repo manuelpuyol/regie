@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'relations_cacher'
+
 module DB
   module MySQL
     module Queries

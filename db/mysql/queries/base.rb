@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require_relative 'builder'
+require_relative 'model_caster'
+require_relative '../connection_singleton'
+
 module DB
   module MySQL
     module Queries
@@ -15,6 +19,10 @@ module DB
         end
 
         private
+
+        def connection
+          DB::MySQL::ConnectionSingleton.get
+        end
 
         def builder
           @builder ||= Builder.new(table_name: @table_name, column_names: @column_names)

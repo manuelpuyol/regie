@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../relations'
+
 module DB
   module MySQL
     module Queries
@@ -24,9 +26,9 @@ module DB
 
         def cache_relation_by_type(model, relation, cached_relations)
           case relation[:type]
-          when CounterRecord::Relations::RELATION_TYPES[:has_many]
+          when DB::MySQL::Relations::RELATION_TYPES[:has_many]
             model.instance_variable_set(relation[:variable_name], cached_relations)
-          when CounterRecord::Relations::RELATION_TYPES[:belongs_to]
+          when DB::MySQL::Relations::RELATION_TYPES[:belongs_to]
             model.instance_variable_set(relation[:variable_name], cached_relations.first)
           else
             raise ArgumentError, "Unexpected relation type #{relation.dig(:type)}"

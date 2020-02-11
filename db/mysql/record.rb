@@ -1,5 +1,13 @@
 # frozen_string_literal: true
 
+require_relative 'queries/all'
+require_relative 'queries/create'
+require_relative 'queries/destroy'
+require_relative 'queries/find'
+require_relative 'queries/first'
+require_relative 'queries/update'
+require_relative 'queries/where'
+
 module DB
   module MySQL
     class Record
@@ -23,13 +31,15 @@ module DB
       end
 
       def destroy
-        ActiveRecord::Base.transaction do
-          destroy_dependents
-          self.class.destroy(id)
-        end
+        destroy_dependents
+        self.class.destroy(id)
         true
       rescue StandardError
         false
+      end
+
+      def assign_attributes(attrs)
+        # TODO
       end
 
       class << self

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../relations'
+
 module DB
   module MySQL
     module Queries
@@ -98,13 +100,13 @@ module DB
           relation = relations[include]
 
           case relation[:type]
-          when CounterRecord::Relations::RELATION_TYPES[:has_many]
+          when DB::MySQL::Relations::RELATION_TYPES[:has_many]
             if relation[:through].blank?
               build_has_many_join(relation)
             else
               build_has_many_through_join(relation)
             end
-          when CounterRecord::Relations::RELATION_TYPES[:belongs_to]
+          when DB::MySQL::Relations::RELATION_TYPES[:belongs_to]
             build_belongs_to_join(relation)
           else
             raise ArgumentError, "Unexpected relation type #{relation.dig(:type)}"
