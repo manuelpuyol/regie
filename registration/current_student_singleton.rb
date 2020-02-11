@@ -11,5 +11,9 @@ module Registration
     def get
       @student ||= Student.new(Authentication::CurrentUserSingleton.instance.get)
     end
+
+    def set(student)
+      @student = student
+    end
   end
 end

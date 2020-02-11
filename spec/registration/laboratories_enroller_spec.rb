@@ -6,15 +6,15 @@ RSpec.describe Registration::LaboratoriesEnroller do
   let(:mock_course) { instance_double('Course') }
 
   describe '#new' do
-    let(:mock_user) { instance_double('User') }
+    let(:mock_student) { instance_double('Student') }
     subject { described_class.new(course: mock_course) }
 
     before do
-      allow(Authentication::CurrentUserSingleton).to receive_message_chain(:instance, :get).and_return(mock_user)
+      allow(Registration::CurrentStudent).to receive_message_chain(:instance, :get).and_return(mock_student)
     end
 
     it 'sets @student as the singleton current user' do
-      expect(subject.instance_variable_get('@student')).to eq(mock_user)
+      expect(subject.instance_variable_get('@student')).to eq(mock_student)
     end
 
     it 'sets @course the receiver course' do
