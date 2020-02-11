@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 require 'singleton'
-require './authentication/current_user_singleton'
-require_relative 'student'
+require_relative 'current_student'
 
 module Registration
-  class CurrentStudentSingleton
+  class CurrentStudentSingleton < CurrentStudent
     include Singleton
-
-    def get
-      @student ||= Student.new(Authentication::CurrentUserSingleton.instance.get)
-    end
-
-    def set(student)
-      @student = student
-    end
   end
 end
