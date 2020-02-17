@@ -16,7 +16,11 @@ module DB
       include Relations
 
       def initialize(attrs = {})
-        assign_attributes(attrs)
+        if attrs.is_a?(Hash)
+          assign_attributes(attrs)
+        else
+          assign_attributes(attrs.to_h)
+        end
       end
 
       def reload(includes: nil)
@@ -41,6 +45,13 @@ module DB
       def assign_attributes(attrs = {})
         self.class.column_names.each do |col|
           instance_variable_set("@#{col}", attrs[col])
+        end
+      end
+
+      def to_h
+        self.class.column_names.each_with_object({}) do |col, acc|
+          acc[col] = instance_variable_get("@#{col}")
+          acc
         end
       end
 
@@ -101,7 +112,7 @@ module DB
         end
 
         def table_name
-          name.split('::').last.downcase.pluralize
+          name.split('::').last.underscore.pluralize
         end
 
         def column_names

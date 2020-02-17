@@ -13,17 +13,26 @@ module DB
       def self.included(base)
         base.class_eval do
           extend ClassMethods
-          @relations = {}
+
+          @@relations
+          self.relations = {}
         end
       end
 
       module ClassMethods
-        def belongs_to(name, class_name: nil, polymorphic: false)
-          super
-          add_relation(name, type: :belongs_to, class_name: class_name, polymorphic: polymorphic)
+        def relations
+          @@relations
+        end
+
+        def relations=(val)
+          @@relations = val
+        end
+
+        def belongs_to(name, klass:, polymorphic: false)
+          add_relation(name, type: :belongs_to, klass: klass, polymorphic: polymorphic)
 
           define_method(name) do
-            relation = relations[name]
+            relation = self.class.relations[name]
 
             return instance_variable_get(relation[:variable_name]) if instance_variable_get(relation[:variable_name])
 
@@ -32,11 +41,11 @@ module DB
         end
 
         # rubocop:disable Naming/PredicateName
-        def has_many(name, class_name: nil, foreign_key: "#{table_name.singularize}_id", through: nil, dependent: nil)
-          add_relation(name, type: :has_many, class_name: class_name, foreign_key: foreign_key, through: through, dependent: dependent)
+        def has_many(name, klass:, foreign_key: "#{table_name.singularize}_id", dependent: nil)
+          add_relation(name, type: :has_many, klass: klass, foreign_key: foreign_key, dependent: dependent)
 
           define_method(name) do
-            relation = relations[name]
+            relation = self.class.relations[name]
 
             return instance_variable_get(relation[:variable_name]) if instance_variable_get(relation[:variable_name])
 
@@ -44,7 +53,7 @@ module DB
           end
 
           define_method("#{name}_count") do
-            relation = relations[name]
+            relation = self.class.relations[name]
             count_variable = "#{relation[:variable_name]}_count"
 
             return instance_variable_get(count_variable) if instance_variable_get(count_variable)
@@ -56,19 +65,15 @@ module DB
 
         private
 
-        def add_relation(name, type:, class_name:, foreign_key: nil, polymorphic: false, through: nil, dependent: nil)
-          relation_klass = ClassInferrer.infer(name, class_name, polymorphic)
-
-          @relations = relations.dup
+        def add_relation(name, type:, klass:, foreign_key: nil, polymorphic: false, dependent: nil)
           relations[name] = {
             type: RELATION_TYPES[type],
-            klass: relation_klass,
-            table_name: relation_klass&.table_name,
+            klass: klass,
+            table_name: klass&.table_name,
             table_alias: name.to_s.pluralize,
             column_name: foreign_key || "#{name}_id",
             variable_name: "@#{name}",
             polymorphic: polymorphic,
-            through: through,
             dependent: dependent
           }
         end
