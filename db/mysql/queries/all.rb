@@ -6,7 +6,7 @@ module DB
   module MySQL
     module Queries
       class All < Base
-        def all
+        def call
           query = builder.generate_query(includes: @includes, limit: @limit)
           sql_result = connection.query(query)
 
