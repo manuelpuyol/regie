@@ -4,7 +4,7 @@ require './db/mysql/connection'
 
 RSpec.shared_examples 'a DB record' do |table_name|
   describe 'database compatibility' do
-    let(:connection) { DB::MySQL::Connection.new.connection}
+    let(:connection) { DB::MySQL::Connection.new.connection }
 
     it 'must have the correct table_name' do
       expect(described_class.table_name).to eq(table_name)

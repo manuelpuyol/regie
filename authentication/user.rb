@@ -12,6 +12,10 @@ module Authentication
 
     attr_accessor :id, :name, :email, :password, :type, :created_at, :updated_at
 
+    def self.table_name
+      'users'
+    end
+
     def self.column_names
       %w[id name email password type created_at updated_at]
     end
