@@ -5,6 +5,8 @@ require 'mysql2'
 module DB
   module MySQL
     class Connection
+      attr_reader :connection
+
       def initialize
         @connection = Mysql2::Client.new(
           host: 'localhost',
