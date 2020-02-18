@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'pry'
-require_relative 'core'
+require_relative 'app/app'
 
 begin
   app = App::App.new

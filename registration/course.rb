@@ -9,9 +9,5 @@ module Registration
     def self.column_names
       %w[id name code created_at updated_at]
     end
-
-    def initialize(name:)
-      @name = name
-    end
   end
 end
