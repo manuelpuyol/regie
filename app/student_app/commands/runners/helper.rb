@@ -11,7 +11,7 @@ module App
             @logger.print "\nYou are logged in as a student"
             @logger.print "\n==============================================\n\n"
             @logger.print "Here are the available commands you may use:\n\n"
-            @logger.print "#{cmd(:courses)} - list your current courses"
+            @logger.print "#{cmd(:my_courses)} - list your current courses"
             @logger.print "#{cmd(:quit)} - quits the application"
             @logger.print "#{cmd(:help)} - prints this help message\n\n"
           end

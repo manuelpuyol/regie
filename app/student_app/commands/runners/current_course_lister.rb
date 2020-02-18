@@ -7,7 +7,7 @@ module App
   module StudentApp
     module Commands
       module Runners
-        class CourseLister < App::Commands::Runners::Base
+        class CurrentCourseLister < App::Commands::Runners::Base
           def run
             @logger.print "\nHere are your courses:\n\n"
 
