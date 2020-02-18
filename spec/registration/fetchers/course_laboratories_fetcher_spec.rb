@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './registration/course_laboratories_fetcher'
+require './registration/fetchers/course_laboratories_fetcher'
 
-RSpec.describe Registration::CourseLaboratoriesFetcher do
+RSpec.describe Registration::Fetchers::CourseLaboratoriesFetcher do
   let(:mock_course) { instance_double('Course') }
 
   describe '#new' do

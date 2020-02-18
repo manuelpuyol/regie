@@ -27,7 +27,7 @@ RSpec.describe Registration::LaboratoriesEnroller do
     subject { described_class.new(course: mock_course).call }
 
     before do
-      allow_any_instance_of(Registration::CourseLaboratoriesFetcher).to receive(:call).and_return(laboratories)
+      allow_any_instance_of(Registration::Fetchers::CourseLaboratoriesFetcher).to receive(:call).and_return(laboratories)
     end
 
     it 'calls LaboratoryEnroller for each of the laboratories courses' do

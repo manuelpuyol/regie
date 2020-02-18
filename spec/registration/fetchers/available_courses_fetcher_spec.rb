@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './registration/available_courses_fetcher'
+require './registration/fetchers/available_courses_fetcher'
 
-RSpec.describe Registration::AvailableCoursesFetcher do
+RSpec.describe Registration::Fetchers::AvailableCoursesFetcher do
   let(:courses) { [instance_double('Course'), instance_double('Course'), instance_double('Course')] }
 
   before do

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './registration/current_courses_fetcher'
+require './registration/fetchers/current_courses_fetcher'
 
-RSpec.describe Registration::CurrentCoursesFetcher do
+RSpec.describe Registration::Fetchers::CurrentCoursesFetcher do
   let(:mock_student) { instance_double('Student', courses: courses) }
   let(:courses) { [instance_double('Course'), instance_double('Course'), instance_double('Course')] }
 

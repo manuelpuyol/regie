@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
+require_relative 'fetchers/course_laboratories_fetcher'
 require_relative 'current_student_singleton'
 require_relative 'laboratory_enroller'
-require_relative 'course_laboratories_fetcher'
 
 module Registration
   class LaboratoriesEnroller
@@ -25,7 +25,7 @@ module Registration
     end
 
     def laboratories
-      CourseLaboratoriesFetcher.new(course: @course).call
+      Fetchers::CourseLaboratoriesFetcher.new(course: @course).call
     end
   end
 end

@@ -29,7 +29,7 @@ RSpec.describe Registration::CourseEnroller do
       let(:course_list) { [instance_double('Course'), instance_double('Course'), instance_double('Course'), instance_double('Course')] }
 
       before do
-        allow(Registration::CurrentCoursesFetcher).to receive_message_chain(:new, :call).and_return(course_list)
+        allow(Registration::Fetchers::CurrentCoursesFetcher).to receive_message_chain(:new, :call).and_return(course_list)
       end
 
       it 'returns false' do
@@ -39,7 +39,7 @@ RSpec.describe Registration::CourseEnroller do
 
     context 'when prerequisites arent met' do
       before do
-        allow(Registration::CurrentCoursesFetcher).to receive_message_chain(:new, :call, :size).and_return(0)
+        allow(Registration::Fetchers::CurrentCoursesFetcher).to receive_message_chain(:new, :call, :size).and_return(0)
         allow(Registration::PrerequisitesChecker).to receive_message_chain(:new, :call).and_return(false)
       end
 
@@ -50,7 +50,7 @@ RSpec.describe Registration::CourseEnroller do
 
     context 'when student can enroll' do
       before do
-        allow(Registration::CurrentCoursesFetcher).to receive_message_chain(:new, :call, :size).and_return(0)
+        allow(Registration::Fetchers::CurrentCoursesFetcher).to receive_message_chain(:new, :call, :size).and_return(0)
         allow(Registration::PrerequisitesChecker).to receive_message_chain(:new, :call).and_return(true)
       end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require './app/commands/runners/base'
-require './registration/current_courses_presenter'
+require './registration/presenters/current_courses_presenter'
 
 module App
   module StudentApp

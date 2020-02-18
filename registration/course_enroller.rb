@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'fetchers/current_courses_fetcher'
 require_relative 'current_student_singleton'
-require_relative 'current_courses_fetcher'
 require_relative 'prerequisites_checker'
 require_relative 'laboratories_enroller'
 
@@ -32,7 +32,7 @@ module Registration
     end
 
     def enough_space?
-      CurrentCoursesFetcher.new.call.size < MAX_COURSES_PER_QUARTER
+      Fetchers::CurrentCoursesFetcher.new.call.size < MAX_COURSES_PER_QUARTER
     end
 
     def prerequisites_met?

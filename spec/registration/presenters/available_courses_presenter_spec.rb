@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './registration/available_courses_presenter'
+require './registration/presenters/available_courses_presenter'
 
-RSpec.describe Registration::AvailableCoursesPresenter do
+RSpec.describe Registration::Presenters::AvailableCoursesPresenter do
   describe '#call' do
     let(:mock_courses) do
       [
@@ -14,12 +14,12 @@ RSpec.describe Registration::AvailableCoursesPresenter do
     subject { described_class.new.call }
 
     before do
-      allow(Registration::AvailableCoursesFetcher).to receive_message_chain(:new, :call).and_return(mock_courses)
+      allow(Registration::Fetchers::AvailableCoursesFetcher).to receive_message_chain(:new, :call).and_return(mock_courses)
     end
 
     it 'calls CoursePresenter with the correct parameters' do
       mock_courses.each do |course|
-        expect(Registration::CoursePresenter).to receive(:new).with(course).and_call_original
+        expect(Registration::Presenters::CoursePresenter).to receive(:new).with(course).and_call_original
       end
 
       subject
