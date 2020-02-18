@@ -36,7 +36,7 @@ module DB
 
             return instance_variable_get(relation[:variable_name]) if instance_variable_get(relation[:variable_name])
 
-            instance_variable_set(relation[:variable_name], relation[:klass].find(instance_variable_get("@#{relation[:column_name]}")))
+            instance_variable_set(relation[:variable_name], relation[:klass].find(send(relation[:column_name])))
           end
         end
 
@@ -49,7 +49,7 @@ module DB
 
             return instance_variable_get(relation[:variable_name]) if instance_variable_get(relation[:variable_name])
 
-            instance_variable_set(relation[:variable_name], relation[:klass].where(relation[:column_name] => instance_variable_get("@id")))
+            instance_variable_set(relation[:variable_name], relation[:klass].where(relation[:column_name] => id))
           end
 
           define_method("#{name}_count") do

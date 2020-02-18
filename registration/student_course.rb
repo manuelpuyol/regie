@@ -6,6 +6,8 @@ require_relative 'course'
 
 module Registration
   class StudentCourse < DB::MySQL::Record
+    attr_accessor :id, :student_id, :course_id, :created_at, :updated_at
+
     def self.column_names
       %w[id student_id course_id created_at updated_at]
     end

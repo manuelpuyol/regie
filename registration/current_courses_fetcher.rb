@@ -10,7 +10,6 @@ module Registration
     end
 
     def call
-      binding.pry
       @student.courses
     end
   end
