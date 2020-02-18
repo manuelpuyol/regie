@@ -14,7 +14,6 @@ module DB
         base.class_eval do
           extend ClassMethods
 
-          @@relations
           self.relations = {}
         end
       end
@@ -25,7 +24,7 @@ module DB
         end
 
         def relations=(val)
-          @@relations = val
+          @@relations = val # rubocop:disable Style/ClassVars
         end
 
         def belongs_to(name, klass:, polymorphic: false)

@@ -18,6 +18,7 @@ Metrics/ModuleLength:
     - 'spec/**/*'
 
 Metrics/ClassLength:
+  Max: 150
   Exclude:
     - 'spec/**/*'
 
@@ -26,6 +27,15 @@ Metrics/BlockLength:
     - 'spec/**/*'
 
 Layout/LineLength:
-  Max: 120
+  Max: 150
   Exclude:
     - 'spec/**/*'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ParameterLists:
+  Max: 7

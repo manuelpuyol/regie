@@ -48,7 +48,7 @@ module DB
         end
 
         def generate_update_query(id, attrs)
-          "UPDATE #{@table_name} SET #{set_statement(attrs)} WHERE #{@table_name}.id = #{id.to_i}"
+          "UPDATE #{@table_name} SET #{sql_set_statement(attrs)} WHERE #{@table_name}.id = #{id.to_i}"
         end
 
         def generate_create_query(attrs)
@@ -71,7 +71,7 @@ module DB
 
         private
 
-        def set_statement(attrs)
+        def sql_set_statement(attrs)
           update_attrs = attrs.map do |key, value|
             if value.nil?
               "#{key} = NULL"
