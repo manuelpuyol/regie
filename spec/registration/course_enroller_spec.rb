@@ -4,14 +4,14 @@ require './registration/course_enroller'
 
 RSpec.describe Registration::CourseEnroller do
   let(:mock_course) { instance_double('Course') }
+  let(:mock_student) { instance_double('Student') }
+
+  before do
+    allow(Registration::CurrentStudentSingleton).to receive_message_chain(:instance, :get).and_return(mock_student)
+  end
 
   describe '#new' do
-    let(:mock_student) { instance_double('Student') }
     subject { described_class.new(course: mock_course) }
-
-    before do
-      allow(Registration::CurrentStudentSingleton).to receive_message_chain(:instance, :get).and_return(mock_student)
-    end
 
     it 'sets @student as the singleton current user' do
       expect(subject.instance_variable_get('@student')).to eq(mock_student)
