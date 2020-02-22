@@ -4,7 +4,7 @@ require_relative '../course'
 
 module Registration
   module Fetchers
-    class AvailableCoursesFetcher
+    class AvailableCourses
       def call
         Course.all
       end

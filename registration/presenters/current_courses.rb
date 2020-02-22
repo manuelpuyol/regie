@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../fetchers/current_courses_fetcher'
+require_relative '../fetchers/current_courses'
 require_relative 'courses'
 
 module Registration
@@ -9,7 +9,7 @@ module Registration
       private
 
       def courses
-        Registration::Fetchers::CurrentCoursesFetcher.new.call
+        Registration::Fetchers::CurrentCourses.new.call
       end
     end
   end

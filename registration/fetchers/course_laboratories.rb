@@ -4,7 +4,7 @@ require_relative '../laboratory'
 
 module Registration
   module Fetchers
-    class CourseLaboratoriesFetcher
+    class CourseLaboratories
       def initialize(course:)
         @course = course
       end

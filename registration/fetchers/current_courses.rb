@@ -5,7 +5,7 @@ require_relative '../course'
 
 module Registration
   module Fetchers
-    class CurrentCoursesFetcher
+    class CurrentCourses
       def initialize
         @student = CurrentStudentSingleton.instance.get
       end

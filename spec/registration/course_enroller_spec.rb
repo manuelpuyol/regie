@@ -25,12 +25,12 @@ RSpec.describe Registration::CourseEnroller do
   describe '#call' do
     subject { described_class.new(course: mock_course).call }
 
+    before do
+      allow(Registration::Fetchers::CurrentCourses).to receive_message_chain(:new, :call).and_return(course_list)
+    end
+
     context 'when user has 3 or more courses' do
       let(:course_list) { [instance_double('Course'), instance_double('Course'), instance_double('Course'), instance_double('Course')] }
-
-      before do
-        allow(Registration::Fetchers::CurrentCoursesFetcher).to receive_message_chain(:new, :call).and_return(course_list)
-      end
 
       it 'returns false' do
         expect(subject).to eq(false)
@@ -38,8 +38,9 @@ RSpec.describe Registration::CourseEnroller do
     end
 
     context 'when prerequisites arent met' do
+      let(:course_list) { [] }
+
       before do
-        allow(Registration::Fetchers::CurrentCoursesFetcher).to receive_message_chain(:new, :call, :size).and_return(0)
         allow(Registration::PrerequisitesChecker).to receive_message_chain(:new, :call).and_return(false)
       end
 
@@ -49,8 +50,9 @@ RSpec.describe Registration::CourseEnroller do
     end
 
     context 'when student can enroll' do
+      let(:course_list) { [] }
+
       before do
-        allow(Registration::Fetchers::CurrentCoursesFetcher).to receive_message_chain(:new, :call, :size).and_return(0)
         allow(Registration::PrerequisitesChecker).to receive_message_chain(:new, :call).and_return(true)
       end
 

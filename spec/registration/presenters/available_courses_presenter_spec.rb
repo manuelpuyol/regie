@@ -14,7 +14,7 @@ RSpec.describe Registration::Presenters::AvailableCourses do
     subject { described_class.new.call }
 
     before do
-      allow(Registration::Fetchers::AvailableCoursesFetcher).to receive_message_chain(:new, :call).and_return(mock_courses)
+      allow(Registration::Fetchers::AvailableCourses).to receive_message_chain(:new, :call).and_return(mock_courses)
     end
 
     it 'calls Course with the correct parameters' do

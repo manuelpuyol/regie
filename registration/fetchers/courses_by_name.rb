@@ -4,7 +4,7 @@ require_relative 'course'
 
 module Registration
   module Fetchers
-    class CoursesFetcherByName
+    class CoursesByName
       def initialize(partial)
         @partial = partial
       end
