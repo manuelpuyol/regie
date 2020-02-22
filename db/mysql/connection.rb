@@ -10,9 +10,9 @@ module DB
       def initialize
         @connection = Mysql2::Client.new(
           host: 'localhost',
-          username: 'manuelpuyol',
-          password: '1234567890',
-          database: 'regie_db'
+          username: ENV['DB_USERNAME'],
+          password: ENV['DB_PASSOWRD'],
+          database: ENV['DB_NAME']
         )
       end
     end

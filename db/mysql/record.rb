@@ -42,6 +42,10 @@ module DB
         false
       end
 
+      def save!
+        binding.pry
+      end
+
       def assign_attributes(attrs = {})
         self.class.column_names.each do |col|
           instance_variable_set("@#{col}", attrs[col] || attrs[col.to_sym])
