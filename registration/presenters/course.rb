@@ -2,7 +2,7 @@
 
 module Registration
   module Presenters
-    class CoursePresenter
+    class Course
       def initialize(course)
         @course = course
       end

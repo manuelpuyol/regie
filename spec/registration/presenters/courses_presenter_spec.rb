@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require './registration/presenters/courses_presenter'
+require './registration/presenters/courses'
 require './registration/course'
 
-RSpec.describe Registration::Presenters::CoursesPresenter do
+RSpec.describe Registration::Presenters::Courses do
   describe '#courses' do
     subject { described_class.new.send(:courses) }
 
@@ -14,7 +14,7 @@ RSpec.describe Registration::Presenters::CoursesPresenter do
 
   describe 'when inherited' do
     let(:dummy_class) do
-      Class.new(Registration::Presenters::CoursesPresenter) do
+      Class.new(Registration::Presenters::Courses) do
         def courses
           @courses ||= [
             Registration::Course.new(code: 'MPCS 2', name: '2'),
@@ -31,7 +31,7 @@ RSpec.describe Registration::Presenters::CoursesPresenter do
 
       it 'calls CoursePresenter with the correct parameters' do
         dummy_instance.courses.sort_by(&:code).each do |course|
-          expect(Registration::Presenters::CoursePresenter).to receive(:new).with(course).and_call_original
+          expect(Registration::Presenters::Course).to receive(:new).with(course).and_call_original
         end
 
         subject

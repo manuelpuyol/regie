@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './registration/presenters/current_courses_presenter'
+require './registration/presenters/current_courses'
 
-RSpec.describe Registration::Presenters::CurrentCoursesPresenter do
+RSpec.describe Registration::Presenters::CurrentCourses do
   describe '#call' do
     let(:mock_courses) do
       [
@@ -19,7 +19,7 @@ RSpec.describe Registration::Presenters::CurrentCoursesPresenter do
 
     it 'calls CoursePresenter with the correct parameters' do
       mock_courses.each do |course|
-        expect(Registration::Presenters::CoursePresenter).to receive(:new).with(course).and_call_original
+        expect(Registration::Presenters::Course).to receive(:new).with(course).and_call_original
       end
 
       subject

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'courses_presenter'
+require_relative 'courses'
 require_relative '../fetchers/available_courses_fetcher'
 
 module Registration
   module Presenters
-    class AvailableCoursesPresenter < CoursesPresenter
+    class AvailableCourses < Courses
       private
 
       def courses

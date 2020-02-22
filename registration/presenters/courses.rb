@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative 'course_presenter'
+require_relative 'course'
 
 module Registration
   module Presenters
-    class CoursesPresenter
+    class Courses
       def call
         sorted_courses.map do |course|
-          CoursePresenter.new(course).call
+          Course.new(course).call
         end
       end
 

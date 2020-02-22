@@ -25,7 +25,7 @@ module App
 
           def courses(query)
             return if query.nil?
-            # Registration::AvailableCoursesPresenter.new.call
+            # Registration::Presenters::AvailableCourses.new.call
           end
         end
       end

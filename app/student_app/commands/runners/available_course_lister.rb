@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require './app/commands/runners/base'
-require './registration/presenters/available_courses_presenter'
+require './registration/presenters/available_courses'
 
 module App
   module StudentApp
@@ -21,7 +21,7 @@ module App
           private
 
           def courses
-            Registration::AvailableCoursesPresenter.new.call
+            Registration::Presenters::AvailableCourses.new.call
           end
         end
       end
