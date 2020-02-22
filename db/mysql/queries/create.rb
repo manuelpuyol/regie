@@ -10,10 +10,11 @@ module DB
         def call
           query = builder.generate_create_query(@attrs)
 
-          sql_result = connection.query(query)
+          connection.query(query)
+          sql_result = connection.query('SELECT LAST_INSERT_ID()')
 
-          id = sql_result.to_a.first['id']
-          Find.new(id, includes: @includes).call
+          id = sql_result.to_a.first['LAST_INSERT_ID()']
+          Find.new(id: id, record_class: @record_class, includes: @includes).call
         end
       end
     end

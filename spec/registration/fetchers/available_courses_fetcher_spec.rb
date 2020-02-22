@@ -3,12 +3,7 @@
 require './registration/fetchers/available_courses'
 
 RSpec.describe Registration::Fetchers::AvailableCourses do
-  let(:courses) { [instance_double('Course'), instance_double('Course'), instance_double('Course')] }
-  let(:lol) { create(:course) }
-
-  before do
-    allow(Registration::Course).to receive(:all).and_return(courses)
-  end
+  let!(:courses) { create_list(:course, 3) }
 
   describe '#call' do
     subject { described_class.new.call }

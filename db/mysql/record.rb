@@ -23,6 +23,13 @@ module DB
         end
       end
 
+      def ==(other)
+        self.class == other.class &&
+          self.class.columns_without_timestamps.all? do |col|
+            instance_variable_get("@#{col}") == other.instance_variable_get("@#{col}")
+          end
+      end
+
       def reload(includes: nil)
         self.class.find(id, includes: includes)
       end
@@ -43,7 +50,6 @@ module DB
       end
 
       def save!
-        binding.pry
         self.class.create(to_h)
       end
 
@@ -122,6 +128,14 @@ module DB
 
         def column_names
           []
+        end
+
+        def columns_without_timestamps
+          column_names - timestamp_columns
+        end
+
+        def timestamp_columns
+          %w[created_at updated_at]
         end
       end
 

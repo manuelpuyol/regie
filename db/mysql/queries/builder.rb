@@ -55,14 +55,18 @@ module DB
           sorted_columns = @column_names.sort - ['id']
           columns = sorted_columns.join(', ')
           column_values = sorted_columns.map do |col|
+            val = attrs[col]
+
             if %w[created_at updated_at].include?(col)
               'NOW()'
+            elsif val.is_a?(String)
+              "'#{val}'"
             else
-              attrs[col]
+              val
             end
           end.join(', ')
 
-          "INSERT INTO #{@table_name} (#{columns}) VALUES (#{column_values}) RETURNING id"
+          "INSERT INTO #{@table_name} (#{columns}) VALUES (#{column_values})"
         end
 
         def generate_destroy_query(id)
