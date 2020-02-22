@@ -44,6 +44,7 @@ module DB
 
       def save!
         binding.pry
+        self.class.create(to_h)
       end
 
       def assign_attributes(attrs = {})
