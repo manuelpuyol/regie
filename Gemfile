@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 ruby '2.6.0'
 
+gem 'factory_bot'
 gem 'mongoid'
 gem 'mysql2'
 gem 'pry'
