@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'course'
+require_relative '../course'
 
 module Registration
   module Fetchers
@@ -10,7 +10,7 @@ module Registration
       end
 
       def call
-        Course.where("name ILIKE %#{partial}%")
+        Course.where("LOWER(name) LIKE '%#{@partial}%'")
       end
     end
   end

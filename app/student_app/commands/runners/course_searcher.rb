@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require './app/commands/runners/base'
+require './registration/presenters/courses_by_name'
 
 module App
   module StudentApp
@@ -17,15 +18,23 @@ module App
 
               query = @logger.get
 
-              @logger.print query
+              @logger.print "\n=================================\n"
+              @logger.print "Results:\n\n"
+
+              courses(query).each do |course|
+                @logger.print course
+              end
+
+              @logger.print "\n=================================\n"
             end
           end
 
           private
 
           def courses(query)
-            return if query.nil?
-            # Registration::Presenters::AvailableCourses.new.call
+            return [] if query.nil? || query == '' || query == 'quit'
+
+            Registration::Presenters::CoursesByName.new(query: query).call
           end
         end
       end
