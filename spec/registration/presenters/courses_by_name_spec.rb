@@ -20,9 +20,5 @@ RSpec.describe Registration::Presenters::CoursesByName do
 
       subject
     end
-
-    it 'sorts the courses by code' do
-      expect(subject).to eq(['Mock - Name to search'])
-    end
   end
 end
