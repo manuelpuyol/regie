@@ -15,7 +15,7 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
   1. Must return the name of each course the student is currently enrolled in :heavy_check_mark:
 
 4. As a student, I want to search a course
-  1. Must be able to search by name
+  1. Must be able to search by name :heavy_check_mark:
   2. Must be able to search by code
 
 5. As a student, I wat to register for a course
