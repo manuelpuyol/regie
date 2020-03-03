@@ -57,14 +57,16 @@ module DB
           column_values = sorted_columns.map do |col|
             val = attrs[col]
 
-            if %w[created_at updated_at].include?(col)
+            if val.nil?
+              'NULL'
+            elsif %w[created_at updated_at].include?(col)
               'NOW()'
             elsif val.is_a?(String)
               "'#{val}'"
             else
               val
             end
-          end.join(', ')
+          end.compact.join(', ')
 
           "INSERT INTO #{@table_name} (#{columns}) VALUES (#{column_values})"
         end

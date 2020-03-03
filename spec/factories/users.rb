@@ -4,7 +4,7 @@ require './authentication/user'
 
 FactoryBot.define do
   factory :user, class: 'Authentication::User' do
-    sequence(:user) { |n| "User #{n}" }
+    sequence(:name) { |n| "User #{n}" }
     sequence(:email) { |n| "user#{n}@example.com" }
     password { '123456' }
     type { Authentication::User::TYPES[:student] }

@@ -50,7 +50,9 @@ module DB
       end
 
       def save!
-        self.class.create(to_h)
+        result = self.class.create(to_h)
+        assign_attributes(result.to_h)
+        self
       end
 
       def assign_attributes(attrs = {})
