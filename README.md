@@ -18,12 +18,12 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
   1. Must be able to search by name :heavy_check_mark:
   2. Must be able to search by code
 
-5. As a student, I wat to register for a course
+5. As a student, I want to register for a course
   1. Must not allow more than 3 active courses in a quarter
   2. Must check if prerequisites are met
   3. Must enroll for accompanying labs
 
-6. As a student, I want to see my grades
+6. As a student, I want to see my grades :heavy_check_mark:
   1. Must print all past grades, divided by quarter
 
 7. As a teacher, I want to see my current courses
