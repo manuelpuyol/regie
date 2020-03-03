@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require './app/student_app/runner'
+require './app/staff_app/runner'
 require './app/commands/runners/base'
 require './authentication/authenticator'
 require './authentication/current_user_singleton'
@@ -28,7 +29,8 @@ module App
               LoginApp::Runner.stop
               StudentApp::Runner.new(user).start
             elsif user.staff?
-              @logger.print 'Staff App still under construction'
+              LoginApp::Runner.stop
+              StaffApp::Runner.new(user).start
             elsif user.admin?
               @logger.print 'Admin App still under construction'
             end
