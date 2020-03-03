@@ -13,7 +13,7 @@ RSpec.describe Registration::Fetchers::GradeHistory do
     subject { described_class.new.call }
 
     it 'returns the list of student_courses that have a grade' do
-      expect(subject).to eq([student_courses[0], student_courses[1]])
+      expect(subject).to eq([student_courses[0..1]])
     end
   end
 end
