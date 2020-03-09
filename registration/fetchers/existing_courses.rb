@@ -6,7 +6,7 @@ module Registration
   module Fetchers
     class ExistingCourses
       def call
-        Course.all
+        Course.all.sort_by(&:code)
       end
     end
   end

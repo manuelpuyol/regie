@@ -16,6 +16,7 @@ module App
             @logger.print "#{cmd(:admin_create)} - creates an admin"
             @logger.print "#{cmd(:course_create)} - creates a course"
             @logger.print "#{cmd(:quarter_create)} - creates a quarter"
+            @logger.print "#{cmd(:assign_course)} - assigns a course to a quarter"
             @logger.print "#{cmd(:quit)} - quits the application"
             @logger.print "#{cmd(:help)} - prints this help message\n\n"
           end
