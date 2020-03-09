@@ -9,7 +9,7 @@ module App
       module Runners
         class CurrentCourseLister < App::Commands::Runners::Base
           def run
-            @logger.print "\nHere are your courses:\n\n"
+            @logger.print "\nHere are your courses for the current quarter:\n\n"
 
             courses.each do |course|
               @logger.print course

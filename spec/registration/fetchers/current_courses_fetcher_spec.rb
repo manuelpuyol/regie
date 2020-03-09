@@ -3,7 +3,7 @@
 require './registration/fetchers/current_courses'
 
 RSpec.describe Registration::Fetchers::CurrentCourses do
-  let(:mock_student) { instance_double('Student', courses: courses) }
+  let(:mock_student) { instance_double('Student', current_courses: courses) }
   let(:courses) { [instance_double('Course'), instance_double('Course'), instance_double('Course')] }
 
   include_context 'mock a student'

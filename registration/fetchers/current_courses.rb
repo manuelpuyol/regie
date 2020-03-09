@@ -10,7 +10,7 @@ module Registration
       end
 
       def call
-        @student.courses
+        @student.current_courses
       end
     end
   end

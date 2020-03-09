@@ -19,5 +19,9 @@ module Registration
 
     require_relative 'course_section'
     has_many :course_sections, klass: CourseSection
+
+    def active?
+      active == 1
+    end
   end
 end
