@@ -4,6 +4,8 @@ require './app/commands/runners/base'
 require './administration/course_section_creator'
 require './registration/fetchers/existing_courses'
 require './registration/presenters/existing_courses'
+require './registration/fetchers/available_quarters'
+require './registration/presenters/available_quarters'
 
 module App
   module AdminApp
@@ -20,7 +22,20 @@ module App
             @logger.print "\nSelect a course (0 - #{courses.size - 1}): "
             @course_idx = @logger.get.to_i
 
-            # create
+            @logger.print "\nSelected => #{courses_view[@course_idx]}"
+
+            @logger.print "\nHere are all the existing quarters:\n"
+
+            quarters_view.each_with_index do |quarter, i|
+              @logger.print "#{i} - #{quarter}"
+            end
+
+            @logger.print "\nSelect a quarter (0 - #{quarters.size - 1}): "
+            @quarter_idx = @logger.get.to_i
+
+            @logger.print "\nSelected => #{quarters_view[@quarter_idx]}"
+
+            create
           end
 
           private
@@ -34,13 +49,25 @@ module App
           end
 
           def courses_view
-            Registration::Presenters::ExistingCourses.new.call
+            @courses_view ||= Registration::Presenters::ExistingCourses.new.call
+          end
+
+          def selected_quarter
+            quarters[@quarter_idx]
+          end
+
+          def quarters
+            @quarters ||= Registration::Fetchers::AvailableQuarters.new.call
+          end
+
+          def quarters_view
+            @quarters_view ||= Registration::Presenters::AvailableQuarters.new.call
           end
 
           def create
             Administration::CourseSectionCreator.new(
-              course_id: @course.id,
-              quarter_id: @quarter.id
+              course_id: selected_course.id,
+              quarter_id: selected_quarter.id
             ).call
           end
         end
