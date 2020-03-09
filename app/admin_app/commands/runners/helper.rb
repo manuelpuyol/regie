@@ -12,6 +12,8 @@ module App
             @logger.print "\n==============================================\n\n"
             @logger.print "Here are the available commands you may use:\n\n"
             @logger.print "#{cmd(:student_create)} - creates a student"
+            @logger.print "#{cmd(:staff_create)} - creates a staff member"
+            @logger.print "#{cmd(:admin_create)} - creates an admin"
             @logger.print "#{cmd(:quit)} - quits the application"
             @logger.print "#{cmd(:help)} - prints this help message\n\n"
           end

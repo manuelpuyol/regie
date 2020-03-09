@@ -7,9 +7,9 @@ module App
   module AdminApp
     module Commands
       module Runners
-        class StudentCreator < App::Commands::Runners::Base
+        class StaffCreator < App::Commands::Runners::Base
           def run
-            @logger.print "\nYou are creating a STUDENT"
+            @logger.print "\nYou are creating a STAFF"
             @logger.print "\nName: "
             @name = @logger.get
 
@@ -29,7 +29,7 @@ module App
               name: @name,
               email: @email,
               password: @password,
-              type: :student
+              type: :staff
             ).call
           end
         end
