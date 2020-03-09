@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
 require './db/mysql/record'
-require_relative 'student'
-require_relative 'course'
 
 module Registration
   class StudentSection < DB::MySQL::Record
-    attr_accessor :id, :student_id, :course_id, :grade, :created_at, :updated_at
+    attr_accessor :id, :student_id, :section_id, :grade, :created_at, :updated_at
 
     def self.column_names
-      %w[id student_id course_id grade created_at updated_at]
+      %w[id student_id section_id grade created_at updated_at]
     end
 
+    require_relative 'student'
     belongs_to :student, klass: Student
-    belongs_to :course, klass: Course
+
+    require_relative 'course_section'
+    belongs_to :course_section, klass: CourseSection
   end
 end

@@ -9,12 +9,14 @@ RSpec.describe Registration::Student do
     let(:student) { described_class.new }
     let(:course) { Registration::Course.new }
     let(:student_section) { Registration::StudentSection.new }
+    let(:course_section) { Registration::CourseSection.new }
 
     subject { student.courses }
 
     before do
       allow(student).to receive(:student_sections).and_return([student_section])
-      allow(student_section).to receive(:course).and_return(course)
+      allow(student_section).to receive(:course_section).and_return(course_section)
+      allow(course_section).to receive(:course).and_return(course)
     end
 
     it 'returns the student courses' do

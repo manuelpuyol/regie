@@ -8,7 +8,7 @@ module Registration
     has_many :student_sections, klass: StudentSection, dependent: :destroy, foreign_key: 'student_id'
 
     def courses
-      student_sections.map(&:course)
+      student_sections.map(&:course_section).map(&:course)
     end
   end
 end
