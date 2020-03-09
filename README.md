@@ -11,7 +11,7 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
 
 2. As a user, I want to change my password
 
-3. As a student, I want to see my current courses :heavy_check_mark: 
+3. As a student, I want to see my current courses :heavy_check_mark:
   1. Must return the name of each course the student is currently enrolled in :heavy_check_mark:
 
 4. As a student, I want to search a course
@@ -24,7 +24,7 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
   3. Must enroll for accompanying labs
 
 6. As a student, I want to see my grades :heavy_check_mark:
-  1. Must print all past grades, divided by quarter
+  1. Must print all past grades, divided by quarter :heavy_check_mark:
 
 7. As a teacher, I want to see my current courses
   1. Must show building/room assignment
