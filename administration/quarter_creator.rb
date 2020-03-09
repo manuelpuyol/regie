@@ -7,7 +7,8 @@ module Administration
     def initialize(year:, code:)
       @quarter = Registration::Quarter.new(
         year: year.to_i,
-        code: code.to_i
+        code: code.to_i,
+        active: false
       )
     end
 
