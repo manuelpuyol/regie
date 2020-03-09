@@ -8,14 +8,6 @@ RSpec.describe Registration::Fetchers::CurrentCourses do
 
   include_context 'mock a student'
 
-  describe '#new' do
-    subject { described_class.new }
-
-    it 'sets @student as the singleton current user' do
-      expect(subject.instance_variable_get('@student')).to eq(mock_student)
-    end
-  end
-
   describe '#call' do
     subject { described_class.new.call }
 
