@@ -19,5 +19,9 @@ module Registration
     def course
       course_section.course
     end
+
+    def quarter
+      course_section.quarter
+    end
   end
 end
