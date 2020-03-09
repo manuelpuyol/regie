@@ -4,11 +4,11 @@ require './authentication/user'
 
 module Registration
   class Student < Authentication::User
-    require_relative 'student_course'
-    has_many :student_courses, klass: StudentCourse, dependent: :destroy, foreign_key: 'student_id'
+    require_relative 'student_section'
+    has_many :student_sections, klass: StudentSection, dependent: :destroy, foreign_key: 'student_id'
 
     def courses
-      student_courses.map(&:course)
+      student_sections.map(&:course)
     end
   end
 end

@@ -8,7 +8,7 @@ module Registration
     class GradeHistory < Grades
       private
 
-      def student_courses
+      def student_sections
         Registration::Fetchers::GradeHistory.new.call
       end
     end

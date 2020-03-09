@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS courses (
   CONSTRAINT unique_code UNIQUE (code)
 );
 
-CREATE TABLE IF NOT EXISTS student_courses (
+CREATE TABLE IF NOT EXISTS student_sections (
   id INT AUTO_INCREMENT PRIMARY KEY,
   course_id INT NOT NULL,
   student_id INT NOT NULL,

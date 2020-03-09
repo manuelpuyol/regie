@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require './registration/presenters/grades'
-require './registration/student_course'
+require './registration/student_section'
 
 RSpec.describe Registration::Presenters::Grades do
-  describe '#student_courses' do
-    subject { described_class.new.send(:student_courses) }
+  describe '#student_sections' do
+    subject { described_class.new.send(:student_sections) }
 
     it 'raises a NotImplementedError' do
       expect { subject }.to raise_error(NotImplementedError)
@@ -15,11 +15,11 @@ RSpec.describe Registration::Presenters::Grades do
   describe 'when inherited' do
     let(:dummy_class) do
       Class.new(described_class) do
-        def student_courses
-          @student_courses ||= [
-            Registration::StudentCourse.new,
-            Registration::StudentCourse.new,
-            Registration::StudentCourse.new
+        def student_sections
+          @student_sections ||= [
+            Registration::StudentSection.new,
+            Registration::StudentSection.new,
+            Registration::StudentSection.new
           ]
         end
       end
@@ -31,7 +31,7 @@ RSpec.describe Registration::Presenters::Grades do
       subject { dummy_instance.call }
 
       it 'calls GradePresenter with the correct parameters' do
-        dummy_instance.student_courses.each do |grade|
+        dummy_instance.student_sections.each do |grade|
           expect(Registration::Presenters::Grade).to receive(:new).with(grade).and_return(mock_grade_presenter)
         end
 

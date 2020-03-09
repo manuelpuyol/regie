@@ -5,7 +5,7 @@ require_relative 'student'
 require_relative 'course'
 
 module Registration
-  class StudentCourse < DB::MySQL::Record
+  class StudentSection < DB::MySQL::Record
     attr_accessor :id, :student_id, :course_id, :grade, :created_at, :updated_at
 
     def self.column_names

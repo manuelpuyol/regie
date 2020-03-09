@@ -5,18 +5,18 @@ require_relative 'course'
 module Registration
   module Presenters
     class Grade
-      def initialize(student_course)
-        @student_course = student_course
+      def initialize(student_section)
+        @student_section = student_section
       end
 
       def call
-        "#{course} => #{@student_course.grade}"
+        "#{course} => #{@student_section.grade}"
       end
 
       private
 
       def course
-        Course.new(@student_course.course).call
+        Course.new(@student_section.course).call
       end
     end
   end

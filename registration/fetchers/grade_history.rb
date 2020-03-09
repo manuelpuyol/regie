@@ -10,7 +10,7 @@ module Registration
       end
 
       def call
-        @student.student_courses.reject { |sc| sc.grade.nil? }
+        @student.student_sections.reject { |sc| sc.grade.nil? }
       end
     end
   end
