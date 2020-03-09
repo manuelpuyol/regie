@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 require_relative 'grade'
-require_relative 'quarter'
+require_relative 'quarter_string'
 
 module Registration
   module Presenters
     class Grades
       def call
         grouped_sections.each_with_object({}) do |(key, values), hash|
-          hash[Quarter.new(key).call] = values.map do |student_section|
+          hash[QuarterString.new(key).call] = values.map do |student_section|
             Grade.new(student_section).call
           end.sort
         end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../quarter'
+require_relative 'quarter_string'
 
 module Registration
   module Presenters
@@ -10,17 +10,7 @@ module Registration
       end
 
       def call
-        "#{year} - #{Registration::Quarter::CODES[code.to_i]}"
-      end
-
-      private
-
-      def year
-        @quarter.split(' - ').first
-      end
-
-      def code
-        @quarter.split(' - ').last
+        QuarterString.new("#{@quarter.year} - #{@quarter.code}").call
       end
     end
   end
