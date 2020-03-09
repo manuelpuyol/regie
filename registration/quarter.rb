@@ -4,7 +4,7 @@ require './db/mysql/record'
 
 module Registration
   class Quarter < DB::MySQL::Record
-    attr_accessor :id, :year, :code, :created_at, :updated_at
+    attr_accessor :id, :year, :code, :active, :created_at, :updated_at
 
     CODES = {
       1 => 'Winter',
@@ -14,7 +14,7 @@ module Registration
     }.freeze
 
     def self.column_names
-      %w[id year code created_at updated_at]
+      %w[id year code active created_at updated_at]
     end
 
     require_relative 'course_section'

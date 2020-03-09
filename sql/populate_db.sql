@@ -4,7 +4,7 @@ INSERT INTO users (name, email, password, type) VALUES ('Staff', 'staff@uchicago
 INSERT INTO users (name, email, password, type) VALUES ('Admin', 'admin@uchicago.edu', '1', 3);
 
 INSERT INTO quarters (year, code) VALUES (2020, 1);
-INSERT INTO quarters (year, code) VALUES (2020, 2);
+INSERT INTO quarters (year, code, active) VALUES (2020, 2, TRUE);
 
 # Quarter 1
 INSERT INTO courses (name, code) VALUES ('C/C++ for Advanced Programmers', 'MPCS 51044');
