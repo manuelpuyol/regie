@@ -6,9 +6,9 @@ RSpec.describe Administration::QuarterCreator do
   describe '#call' do
     let(:year) { 2020 }
     let(:code) { 1 }
-    let(:creatoe) { described_class.new(year: year, code: code) }
+    let(:creator) { described_class.new(year: year, code: code) }
 
-    subject { creatoe.call }
+    subject { creator.call }
 
     it 'creates a quarter' do
       quarter = subject

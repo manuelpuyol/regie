@@ -6,9 +6,9 @@ RSpec.describe Administration::CourseCreator do
   describe '#call' do
     let(:name) { 'name' }
     let(:code) { 'code' }
-    let(:creatoe) { described_class.new(name: name, code: code) }
+    let(:creator) { described_class.new(name: name, code: code) }
 
-    subject { creatoe.call }
+    subject { creator.call }
 
     it 'creates a course' do
       course = subject

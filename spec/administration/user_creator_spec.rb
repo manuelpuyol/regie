@@ -7,9 +7,9 @@ RSpec.describe Administration::UserCreator do
     let(:name) { 'name' }
     let(:email) { 'email' }
     let(:password) { 'password' }
-    let(:creatoe) { described_class.new(name: name, email: email, password: password, type: type) }
+    let(:creator) { described_class.new(name: name, email: email, password: password, type: type) }
 
-    subject { creatoe.call }
+    subject { creator.call }
 
     context 'when creating a student' do
       let(:type) { :student }
