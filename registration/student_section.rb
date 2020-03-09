@@ -14,6 +14,10 @@ module Registration
     belongs_to :student, klass: Student
 
     require_relative 'course_section'
-    belongs_to :course_section, klass: CourseSection
+    belongs_to :course_section, klass: CourseSection, foreign_key: 'section_id'
+
+    def course
+      course_section.course
+    end
   end
 end

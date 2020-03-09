@@ -5,7 +5,14 @@ require './registration/fetchers/grade_history'
 
 RSpec.describe Registration::Fetchers::GradeHistory do
   let(:mock_student) { Registration::Student.new(create(:user, :student).to_h) }
-  let!(:student_sections) { [create(:student_section, student_id: mock_student.id), create(:student_section, student_id: mock_student.id), create(:student_section, student_id: mock_student.id, grade: nil)] }
+  let(:quarter) { create(:quarter) }
+  let!(:student_sections) do
+    [
+      create(:student_section, quarter: quarter, student_id: mock_student.id),
+      create(:student_section, quarter: quarter, student_id: mock_student.id),
+      create(:student_section, quarter: quarter, student_id: mock_student.id, grade: nil)
+    ]
+  end
 
   include_context 'mock a student'
 

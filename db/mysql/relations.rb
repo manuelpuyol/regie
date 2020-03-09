@@ -25,8 +25,8 @@ module DB
           @@relations = val # rubocop:disable Style/ClassVars
         end
 
-        def belongs_to(name, klass:, polymorphic: false)
-          add_relation(name, type: :belongs_to, klass: klass, polymorphic: polymorphic)
+        def belongs_to(name, klass:, polymorphic: false, foreign_key: nil)
+          add_relation(name, type: :belongs_to, klass: klass, polymorphic: polymorphic, foreign_key: foreign_key)
 
           define_method(name) do
             relation = self.class.relations[name]
