@@ -36,10 +36,10 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
   1. Must be able to create a grade
   2. Must be able to change a grade
 
-10. As an admin, I want to create a user
-  1. Must be able to create student
-  2. Must be able to create teacher
-  3. Must be able to create admin
+10. As an admin, I want to create a user :heavy_check_mark:
+  1. Must be able to create student :heavy_check_mark:
+  2. Must be able to create teacher :heavy_check_mark:
+  3. Must be able to create admin :heavy_check_mark:
 
 11. As an admin, I want to create a quarter
 
