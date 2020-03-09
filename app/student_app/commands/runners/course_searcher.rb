@@ -18,14 +18,16 @@ module App
 
               query = @logger.get
 
-              @logger.print "\n=================================\n"
-              @logger.print "Results:\n\n"
+              if query != 'quit'
+                @logger.print "\n=================================\n"
+                @logger.print "Results:\n\n"
 
-              courses(query).each do |course|
-                @logger.print course
+                courses(query).each do |course|
+                  @logger.print course
+                end
+
+                @logger.print "\n=================================\n"
               end
-
-              @logger.print "\n=================================\n"
             end
           end
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../course'
+require_relative 'available_courses'
 
 module Registration
   module Fetchers
@@ -10,7 +11,13 @@ module Registration
       end
 
       def call
-        Course.where("LOWER(name) LIKE '%#{@partial}%'")
+        Course.where("id IN (#{course_ids.join(', ')}) AND LOWER(name) LIKE '%#{@partial}%'")
+      end
+
+      private
+
+      def course_ids
+        AvailableCourses.new.call.map(&:id)
       end
     end
   end
