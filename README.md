@@ -41,7 +41,7 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
   2. Must be able to create teacher :heavy_check_mark:
   3. Must be able to create admin :heavy_check_mark:
 
-11. As an admin, I want to create a quarter
+11. As an admin, I want to create a quarter :heavy_check_mark:
 
 12. As an admin, I want to create a course :heavy_check_mark:
 
