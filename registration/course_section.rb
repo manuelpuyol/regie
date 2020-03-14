@@ -20,7 +20,7 @@ module Registration
     belongs_to :professor, klass: Grading::Professor
 
     require_relative 'student_section'
-    has_many :student_sections, klass: StudentSection
+    has_many :student_sections, klass: StudentSection, dependent: :destroy, foreign_key: 'section_id'
 
     def students
       student_sections.map(&:student)

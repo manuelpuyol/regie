@@ -18,7 +18,7 @@ module Registration
     end
 
     require_relative 'course_section'
-    has_many :course_sections, klass: CourseSection
+    has_many :course_sections, klass: CourseSection, dependent: :destroy, foreign_key: 'quarter_id'
 
     def active?
       active == 1
