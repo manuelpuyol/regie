@@ -15,9 +15,9 @@ INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (1, 1, 
 INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (2, 1, 2);
 INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (3, 1, 2);
 
-INSERT INTO student_sections (section_id, student_id, grade) VALUES (1,1, 'A');
-INSERT INTO student_sections (section_id, student_id, grade) VALUES (2,1, 'B');
-INSERT INTO student_sections (section_id, student_id, grade) VALUES (3,1, 'A');
+INSERT INTO student_sections (section_id, student_id, grade) VALUES (1, 1, 'A');
+INSERT INTO student_sections (section_id, student_id, grade) VALUES (2, 1, 'B');
+INSERT INTO student_sections (section_id, student_id, grade) VALUES (3, 1, 'A');
 
 # Quarter 2
 INSERT INTO courses (name, code) VALUES ('Advanced C++', 'MPCS 51045');
@@ -28,4 +28,6 @@ INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (4, 2, 
 INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (5, 2, 2);
 INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (6, 2, 2);
 
-INSERT INTO student_sections (section_id, student_id) VALUES (4,1);
+INSERT INTO student_sections (section_id, student_id) VALUES (4, 1);
+
+INSERT INTO prerequisites (course_id, prerequisite_id) VALUES(4, 1);
