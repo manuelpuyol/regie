@@ -19,7 +19,7 @@ RSpec.describe Registration::Fetchers::CurrentCourses do
     subject { described_class.new.call }
 
     it 'returns the list of current courses from a user' do
-      expect(subject).to match_array([current_student_section.course])
+      expect(subject).to match_array([current_course.course])
     end
   end
 end

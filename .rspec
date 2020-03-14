@@ -4,3 +4,4 @@
 --require ./spec/shared_examples/db_record
 --require ./spec/shared_contexts/mock_user_context.rb
 --require ./spec/shared_contexts/mock_student_context.rb
+--require ./spec/shared_contexts/mock_professor_context.rb
