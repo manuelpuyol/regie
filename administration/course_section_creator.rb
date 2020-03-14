@@ -13,17 +13,15 @@ module Administration
     end
 
     def call
-      if valid?
-        create
-      else
-        raise DB::Errors::RecordNotFound, "Couldn't find a professor with email #{@professor_email}"
-      end
+      create if valid?
     end
 
     private
 
     def valid?
-      !professor.nil?
+      raise DB::Errors::RecordNotFound, "Couldn't find a professor with email #{@professor_email}" if professor.nil?
+
+      true
     end
 
     def create
