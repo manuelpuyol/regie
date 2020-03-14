@@ -4,9 +4,9 @@ require './authentication/user'
 require './registration/course_section'
 
 module Grading
-  class Teacher < Authentication::User
+  class Professor < Authentication::User
     require './registration/course_section'
-    has_many :course_sections, klass: Registration::CourseSection, dependent: :destroy, foreign_key: 'teacher_id'
+    has_many :course_sections, klass: Registration::CourseSection, dependent: :destroy, foreign_key: 'professor_id'
 
     def courses
       course_sections.map(&:course)
