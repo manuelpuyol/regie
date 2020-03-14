@@ -6,6 +6,8 @@ module Registration
   class StudentSection < DB::MySQL::Record
     attr_accessor :id, :student_id, :section_id, :grade, :created_at, :updated_at
 
+    VALID_GRADES = %w[A B C F].freeze
+
     def self.column_names
       %w[id student_id section_id grade created_at updated_at]
     end

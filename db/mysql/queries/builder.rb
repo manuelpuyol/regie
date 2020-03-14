@@ -81,6 +81,8 @@ module DB
           update_attrs = attrs.map do |key, value|
             if value.nil?
               "#{key} = NULL"
+            elsif value.is_a?(String)
+              "#{key} = '#{value}'"
             else
               "#{key} = #{value}"
             end
