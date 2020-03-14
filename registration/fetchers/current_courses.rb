@@ -10,7 +10,7 @@ module Registration
       end
 
       def call
-        @student.current_courses
+        @student.reload.current_courses
       end
     end
   end

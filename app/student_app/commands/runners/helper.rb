@@ -13,6 +13,7 @@ module App
             @logger.print "Here are the available commands you may use:\n\n"
             @logger.print "#{cmd(:my_courses)} - list your current courses"
             @logger.print "#{cmd(:list)} - list available courses"
+            @logger.print "#{cmd(:enroll)} - enrolls in a course"
             @logger.print "#{cmd(:search)} - search for courses"
             @logger.print "#{cmd(:grades)} - list all your previous grades"
             @logger.print "#{cmd(:quit)} - quits the application"
