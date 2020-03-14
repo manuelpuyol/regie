@@ -3,15 +3,12 @@
 # require_relative 'student_section'
 require './registration/presenters/quarter'
 require './registration/presenters/course'
+require_relative '../fetchers/student_sections'
 require_relative 'student'
 
 module Grading
   module Presenters
     class StudentSections
-      def initialize(student_sections)
-        @student_sections = student_sections
-      end
-
       def call
         sections
       end
@@ -26,18 +23,26 @@ module Grading
           result[quarter] = {} if result[quarter].nil?
           result[quarter][course] = [] if result[quarter][course].nil?
 
-          result[quarter][course] << section[:student]
+          result[quarter][course] << {
+            label: section[:student],
+            id: section[:id]
+          }
         end
       end
 
       def serialized_sections
-        @student_sections.map do |section|
+        student_sections.map do |section|
           {
+            id: section.id,
             quarter: Registration::Presenters::Quarter.new(section.quarter).call,
             course: Registration::Presenters::Course.new(section.course).call,
             student: Student.new(section.student).call
           }
         end
+      end
+
+      def student_sections
+        Grading::Fetchers::StudentSections.new.call
       end
     end
   end

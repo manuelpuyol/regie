@@ -12,6 +12,7 @@ module App
             @logger.print "\n==============================================\n\n"
             @logger.print "Here are the available commands you may use:\n\n"
             @logger.print "#{cmd(:list)} - list your current courses with students"
+            @logger.print "#{cmd(:grade)} - grade students"
             @logger.print "#{cmd(:quit)} - quits the application"
             @logger.print "#{cmd(:help)} - prints this help message\n\n"
           end
