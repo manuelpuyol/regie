@@ -66,8 +66,6 @@ RSpec.describe Registration::CourseEnroller do
       end
 
       it 'creates a new StudentSection' do
-        result = subject
-
         expect(subject.id).to_not be_nil
         expect(subject.student_id).to eq(mock_student.id)
         expect(subject.section_id).to eq(course_section.id)
