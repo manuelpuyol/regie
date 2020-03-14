@@ -5,20 +5,30 @@ require './registration/course_enroller'
 RSpec.describe Registration::CourseEnroller do
   let(:mock_student) { create(:user, :student) }
   let(:course_section) { create(:course_section) }
+  let(:course_id) { course_section.course_id }
 
   include_context 'mock a student'
 
   describe '#call' do
-    subject { described_class.new(course_section_id: course_section.id).call }
+    subject { described_class.new(course_id: course_id).call }
 
     before do
       allow(Registration::Fetchers::CurrentCourses).to receive_message_chain(:new, :call).and_return(course_list)
     end
 
+    context 'when course is not available' do
+      let(:course_id) { create(:course).id }
+      let(:course_list) { [] }
+
+      it 'raises Registration::Errors::CourseNotAvailable' do
+        expect { subject }.to raise_error(Registration::Errors::CourseNotAvailable)
+      end
+    end
+
     context 'when user has 3 or more courses' do
       let(:course_list) { [instance_double('Course'), instance_double('Course'), instance_double('Course'), instance_double('Course')] }
 
-      it 'raises Registration::ErrorsExceededRegistrationMax' do
+      it 'raises Registration::Errors::ExceededRegistrationMax' do
         expect { subject }.to raise_error(Registration::Errors::ExceededRegistrationMax)
       end
     end
