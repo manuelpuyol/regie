@@ -12,7 +12,7 @@ module App
             @logger.print "\nHere are your grades:\n\n"
 
             grades.each do |quarter, courses|
-              @logger.print "=============="
+              @logger.print '=============='
               @logger.print quarter
               @logger.print "==============\n"
 

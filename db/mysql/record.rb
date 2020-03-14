@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/inflector'
-require "active_support/core_ext/class/attribute"
+require 'active_support/core_ext/class/attribute'
 require_relative 'queries/all'
 require_relative 'queries/create'
 require_relative 'queries/destroy'

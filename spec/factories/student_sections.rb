@@ -8,7 +8,7 @@ FactoryBot.define do
 
     student_id { create(:user, :student).id }
     section_id { create(:course_section, quarter_id: quarter.id).id }
-    grade { ['A', 'B', 'C', 'F'].sample }
+    grade { %w[A B C F].sample }
     created_at { Time.now }
     updated_at { Time.now }
   end

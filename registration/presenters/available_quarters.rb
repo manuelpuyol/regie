@@ -6,7 +6,6 @@ require_relative 'quarter'
 module Registration
   module Presenters
     class AvailableQuarters
-
       def call
         quarters.map do |quarter|
           Quarter.new(quarter).call
