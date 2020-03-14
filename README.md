@@ -9,7 +9,7 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
     1. Login must recognize which persona this user is (Student/Professor/Admin) :heavy_check_mark:
     2. Login must redirect user to correct application :heavy_check_mark:
 
-2. As a user, I want to change my password
+2. As a user, I want to change my password :heavy_check_mark:
 
 3. As a student, I want to see my current courses :heavy_check_mark:
     1. Must return the name of each course the student is currently enrolled in :heavy_check_mark:
