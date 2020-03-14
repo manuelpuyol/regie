@@ -3,27 +3,13 @@
 require './registration/course_enroller'
 
 RSpec.describe Registration::CourseEnroller do
-  let(:mock_course) { instance_double('Course') }
-  let(:mock_student) { instance_double('Student') }
+  let(:mock_student) { create(:user, :student) }
+  let(:course_section) { create(:course_section) }
 
-  before do
-    allow(Registration::CurrentStudentSingleton).to receive_message_chain(:instance, :get).and_return(mock_student)
-  end
-
-  describe '#new' do
-    subject { described_class.new(course: mock_course) }
-
-    it 'sets @student as the singleton current user' do
-      expect(subject.instance_variable_get('@student')).to eq(mock_student)
-    end
-
-    it 'sets @course the receiver course' do
-      expect(subject.instance_variable_get('@course')).to eq(mock_course)
-    end
-  end
+  include_context 'mock a student'
 
   describe '#call' do
-    subject { described_class.new(course: mock_course).call }
+    subject { described_class.new(course_section_id: course_section.id).call }
 
     before do
       allow(Registration::Fetchers::CurrentCourses).to receive_message_chain(:new, :call).and_return(course_list)
@@ -49,6 +35,19 @@ RSpec.describe Registration::CourseEnroller do
       end
     end
 
+    context 'when student is already enrolled' do
+      let(:course_list) { [] }
+      let!(:student_section) { create(:student_section, student_id: mock_student.id, section_id: course_section.id) }
+
+      before do
+        allow(Registration::PrerequisitesChecker).to receive_message_chain(:new, :call).and_return(true)
+      end
+
+      it 'returns false' do
+        expect(subject).to eq(false)
+      end
+    end
+
     context 'when student can enroll' do
       let(:course_list) { [] }
 
@@ -56,8 +55,12 @@ RSpec.describe Registration::CourseEnroller do
         allow(Registration::PrerequisitesChecker).to receive_message_chain(:new, :call).and_return(true)
       end
 
-      it 'enrolls the student in the course' do
-        expect(subject).to eq(true)
+      it 'creates a new StudentSection' do
+        result = subject
+
+        expect(subject.id).to_not be_nil
+        expect(subject.student_id).to eq(mock_student.id)
+        expect(subject.section_id).to eq(course_section.id)
       end
     end
   end

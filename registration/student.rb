@@ -17,10 +17,14 @@ module Registration
       end.map(&:course)
     end
 
-    def current_courses
+    def current_sections
       student_sections.map(&:course_section).select do |section|
         section.quarter.active?
-      end.map(&:course)
+      end
+    end
+
+    def current_courses
+      current_sections.map(&:course)
     end
   end
 end
