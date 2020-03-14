@@ -10,13 +10,13 @@ module App
         class StaffCreator < App::Commands::Runners::Base
           def run
             @logger.print "\nYou are creating a STAFF"
-            @logger.print "\nName: "
+            print "\nName: "
             @name = @logger.get
 
-            @logger.print "\nEmail: "
+            print "\nEmail: "
             @email = @logger.get
 
-            @logger.print "\nPassword: "
+            print "\nPassword: "
             @password = @logger.get
 
             create

@@ -20,7 +20,7 @@ module App
               @logger.print "#{i} - #{course}"
             end
 
-            @logger.print "\nSelect a course (0 - #{courses.size - 1}): "
+            print "\nSelect a course (0 - #{courses.size - 1}): "
             @course_idx = @logger.get.to_i
 
             @logger.print "\nSelected => #{courses_view[@course_idx]}"
@@ -31,12 +31,12 @@ module App
               @logger.print "#{i} - #{quarter}"
             end
 
-            @logger.print "\nSelect a quarter (0 - #{quarters.size - 1}): "
+            print "\nSelect a quarter (0 - #{quarters.size - 1}): "
             @quarter_idx = @logger.get.to_i
 
             @logger.print "\nSelected => #{quarters_view[@quarter_idx]}"
 
-            @logger.print "\nProfessor email:"
+            print "\nProfessor email:"
             @email = @logger.get
 
             create

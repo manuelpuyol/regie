@@ -10,13 +10,13 @@ module App
         class StudentCreator < App::Commands::Runners::Base
           def run
             @logger.print "\nYou are creating a STUDENT"
-            @logger.print "\nName: "
+            print "\nName: "
             @name = @logger.get
 
-            @logger.print "\nEmail: "
+            print "\nEmail: "
             @email = @logger.get
 
-            @logger.print "\nPassword: "
+            print "\nPassword: "
             @password = @logger.get
 
             create

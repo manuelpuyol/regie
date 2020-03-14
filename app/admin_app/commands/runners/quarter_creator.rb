@@ -10,10 +10,10 @@ module App
         class QuarterCreator < App::Commands::Runners::Base
           def run
             @logger.print "\nYou are creating a QUARTER"
-            @logger.print "\nYear: "
+            print "\nYear: "
             @year = @logger.get
 
-            @logger.print "\nCode: (1 - Winter, 2 - Spring, 3 - Summer, 4 - Fall) "
+            print "\nCode: (1 - Winter, 2 - Spring, 3 - Summer, 4 - Fall) "
             @code = @logger.get
 
             create

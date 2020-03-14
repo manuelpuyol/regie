@@ -17,7 +17,7 @@ module App
               @logger.print "#{idx} - #{quarter.first}"
             end
 
-            @logger.print "\nSelect a quarter (0 - #{sections.size - 1}): "
+            print "\nSelect a quarter (0 - #{sections.size - 1}): "
             @quarter_idx = @logger.get.to_i
             @logger.print "Selected: #{selected_quarter}"
 
@@ -25,7 +25,7 @@ module App
               @logger.print "#{idx} - #{course.first}"
             end
 
-            @logger.print "\nSelect a course (0 - #{selected_quarter_courses.size - 1}): "
+            print "\nSelect a course (0 - #{selected_quarter_courses.size - 1}): "
             @course_idx = @logger.get.to_i
             @logger.print "Selected: #{selected_course}"
 
@@ -33,11 +33,11 @@ module App
               @logger.print "#{idx} - #{student[:label]}"
             end
 
-            @logger.print "\nSelect a student (0 - #{selected_course_students.size - 1}): "
+            print "\nSelect a student (0 - #{selected_course_students.size - 1}): "
             @student_idx = @logger.get.to_i
             @logger.print "Selected: #{selected_student[:label]}\n"
 
-            @logger.print "\nGrade (A, B, C, F): "
+            print "\nGrade (A, B, C, F): "
             @grade = @logger.get
 
             grade

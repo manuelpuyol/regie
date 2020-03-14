@@ -10,10 +10,10 @@ module App
         class CourseCreator < App::Commands::Runners::Base
           def run
             @logger.print "\nYou are creating a COURSE"
-            @logger.print "\nName: "
+            print "\nName: "
             @name = @logger.get
 
-            @logger.print "\nCode: "
+            print "\nCode: "
             @code = @logger.get
 
             create
