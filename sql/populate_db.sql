@@ -27,3 +27,5 @@ INSERT INTO courses (name, code) VALUES ('Parallel Programming', 'MPCS 52060');
 INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (4, 2, 2);
 INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (5, 2, 2);
 INSERT INTO course_sections (course_id, quarter_id, professor_id) VALUES (6, 2, 2);
+
+INSERT INTO student_sections (section_id, student_id) VALUES (4,1);
