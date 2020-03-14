@@ -1,6 +1,6 @@
 # REGIE
 
-REGIE is a command line application developed in Ruby + MySQL + MongoDB
+REGIE is a command line application developed in Ruby + MySQL
 Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/51410-1/project.description.html)
 
 ### User stories
