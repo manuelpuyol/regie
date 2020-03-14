@@ -16,8 +16,8 @@ module Registration
   class CourseEnroller
     MAX_COURSES_PER_QUARTER = 3
 
-    def initialize(course_id:)
-      @course_id = course_id
+    def initialize(course:)
+      @course = course
       @student = CurrentStudentSingleton.instance.get
       @quarter = CurrentQuarterSingleton.instance.get
     end
@@ -62,7 +62,7 @@ module Registration
     end
 
     def course_section_id
-      CourseSection.where(course_id: @course_id, quarter_id: @quarter.id).first&.id
+      CourseSection.where(course_id: @course.id, quarter_id: @quarter.id).first&.id
     end
   end
 end

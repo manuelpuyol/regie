@@ -5,19 +5,19 @@ require './registration/course_enroller'
 RSpec.describe Registration::CourseEnroller do
   let(:mock_student) { create(:user, :student) }
   let(:course_section) { create(:course_section) }
-  let(:course_id) { course_section.course_id }
+  let(:course) { course_section.course }
 
   include_context 'mock a student'
 
   describe '#call' do
-    subject { described_class.new(course_id: course_id).call }
+    subject { described_class.new(course: course).call }
 
     before do
       allow(Registration::Fetchers::CurrentCourses).to receive_message_chain(:new, :call).and_return(course_list)
     end
 
     context 'when course is not available' do
-      let(:course_id) { create(:course).id }
+      let(:course) { create(:course) }
       let(:course_list) { [] }
 
       it 'raises Registration::Errors::CourseNotAvailable' do
