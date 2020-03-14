@@ -11,7 +11,7 @@ module Grading
       end
 
       def call
-        "#{course}\n\n#{students}"
+        "#{course}\n\nStudents:\n\n#{presented_students}"
       end
 
       private
@@ -20,8 +20,14 @@ module Grading
         Registration::Presenters::Course.new(@course_section.course).call
       end
 
+      def presented_students
+        return 'None' if students.empty?
+
+        students
+      end
+
       def students
-        Students.new(@course_section.students).call.join("\n")
+        @students ||= Students.new(@course_section.students).call.join("\n")
       end
     end
   end

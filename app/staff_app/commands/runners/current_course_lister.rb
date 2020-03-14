@@ -13,6 +13,7 @@ module App
 
             courses.each do |course|
               @logger.print course
+              @logger.print "\n\n================================\n\n"
             end
 
             @logger.print "\n"
