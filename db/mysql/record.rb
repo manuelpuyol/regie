@@ -59,8 +59,8 @@ module DB
       end
 
       def assign_attributes(attrs = {})
-        self.class.column_names.each do |col|
-          instance_variable_set("@#{col}", attrs[col] || attrs[col.to_sym])
+        attrs.each_key do |key|
+          instance_variable_set("@#{key}", attrs[key]) if column?(key)
         end
       end
 
@@ -157,6 +157,10 @@ module DB
         relations.select do |_name, relation|
           relation[:dependent] == :destroy
         end
+      end
+
+      def column?(key)
+        self.class.column_names.include?(key.to_s)
       end
     end
   end
