@@ -32,9 +32,9 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
 8. As a professor, I want to see my current students :heavy_check_mark:
     1. Must show a list of students per current course :heavy_check_mark:
 
-9. As a professor, I want to grade a student
-    1. Must be able to create a grade
-    2. Must be able to change a grade
+9. As a professor, I want to grade a student :heavy_check_mark:
+    1. Must be able to create a grade :heavy_check_mark:
+    2. Must be able to change a grade :heavy_check_mark:
 
 10. As an admin, I want to create a user :heavy_check_mark:
     1. Must be able to create student :heavy_check_mark:
