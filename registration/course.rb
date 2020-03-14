@@ -9,5 +9,12 @@ module Registration
     def self.column_names
       %w[id name code created_at updated_at]
     end
+
+    require_relative 'prerequisite'
+    has_many :prerequisites_relations, klass: Prerequisite, dependent: :destroy, foreign_key: 'course_id'
+
+    def prerequisites
+      prerequisites_relations.map(&:prerequisite)
+    end
   end
 end
