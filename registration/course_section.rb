@@ -21,5 +21,9 @@ module Registration
 
     require_relative 'student_section'
     has_many :student_sections, klass: StudentSection
+
+    def students
+      student_sections.map(&:student)
+    end
   end
 end
