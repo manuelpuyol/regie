@@ -19,8 +19,8 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
     2. Must be able to search by code
 
 5. As a student, I want to register for a course
-    1. Must not allow more than 3 active courses in a quarter
-    2. Must check if prerequisites are met
+    1. Must not allow more than 3 active courses in a quarter :heavy_check_mark:
+    2. Must check if prerequisites are met :heavy_check_mark:
     3. Must enroll for accompanying labs
 
 6. As a student, I want to see my grades :heavy_check_mark:

@@ -18,8 +18,8 @@ RSpec.describe Registration::CourseEnroller do
     context 'when user has 3 or more courses' do
       let(:course_list) { [instance_double('Course'), instance_double('Course'), instance_double('Course'), instance_double('Course')] }
 
-      it 'returns false' do
-        expect(subject).to eq(false)
+      it 'raises Registration::ErrorsExceededRegistrationMax' do
+        expect { subject }.to raise_error(Registration::Errors::ExceededRegistrationMax)
       end
     end
 
@@ -30,8 +30,8 @@ RSpec.describe Registration::CourseEnroller do
         allow(Registration::PrerequisitesChecker).to receive_message_chain(:new, :call).and_return(false)
       end
 
-      it 'returns false' do
-        expect(subject).to eq(false)
+      it 'raises Registration::Errors::MissingPrerequisites' do
+        expect { subject }.to raise_error(Registration::Errors::MissingPrerequisites)
       end
     end
 
@@ -43,8 +43,8 @@ RSpec.describe Registration::CourseEnroller do
         allow(Registration::PrerequisitesChecker).to receive_message_chain(:new, :call).and_return(true)
       end
 
-      it 'returns false' do
-        expect(subject).to eq(false)
+      it 'raises Registration::Errors::AlreadyEnrolled' do
+        expect { subject }.to raise_error(Registration::Errors::AlreadyEnrolled)
       end
     end
 

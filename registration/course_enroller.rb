@@ -6,6 +6,9 @@ require_relative 'prerequisites_checker'
 require_relative 'laboratories_enroller'
 require_relative 'course_section'
 require_relative 'student_section'
+require_relative 'errors/exceeded_registration_max'
+require_relative 'errors/already_enrolled'
+require_relative 'errors/missing_prerequisites'
 
 module Registration
   class CourseEnroller
@@ -17,9 +20,7 @@ module Registration
     end
 
     def call
-      return false unless can_enroll?
-
-      enroll
+      enroll if can_enroll?
     end
 
     private
@@ -33,7 +34,11 @@ module Registration
     end
 
     def can_enroll?
-      enough_space? && not_enrolled? && prerequisites_met?
+      raise Errors::ExceededRegistrationMax unless enough_space?
+      raise Errors::AlreadyEnrolled unless not_enrolled?
+      raise Errors::MissingPrerequisites unless prerequisites_met?
+
+      true
     end
 
     def enough_space?
