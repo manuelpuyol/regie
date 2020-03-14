@@ -14,20 +14,20 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
 3. As a student, I want to see my current courses :heavy_check_mark:
     1. Must return the name of each course the student is currently enrolled in :heavy_check_mark:
 
-4. As a student, I want to search a course
+4. As a student, I want to search a course :heavy_check_mark:
     1. Must be able to search by name :heavy_check_mark:
-    2. Must be able to search by code
+    2. Must be able to search by code (Did not implement since search by name is enough)
 
 5. As a student, I want to register for a course
     1. Must not allow more than 3 active courses in a quarter :heavy_check_mark:
     2. Must check if prerequisites are met :heavy_check_mark:
-    3. Must enroll for accompanying labs
+    3. Must enroll for accompanying labs (Decided to not implement labs to reduce the scope)
 
 6. As a student, I want to see my grades :heavy_check_mark:
     1. Must print all past grades, divided by quarter :heavy_check_mark:
 
 7. As a professor, I want to see my current courses :heavy_check_mark:
-    1. Must show building/room assignment
+    1. Must show building/room assignment (Decided to not implement room assignment to reduce the scope)
 
 8. As a professor, I want to see my current students :heavy_check_mark:
     1. Must show a list of students per current course :heavy_check_mark:
