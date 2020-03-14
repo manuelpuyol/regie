@@ -17,6 +17,8 @@ module App
             @code = @logger.get
 
             create
+
+            @logger.print "\n\nCreated successfully!\n"
           end
 
           private

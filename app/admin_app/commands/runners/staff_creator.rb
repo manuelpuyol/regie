@@ -20,6 +20,8 @@ module App
             @password = @logger.get
 
             create
+
+            @logger.print "\n\nCreated successfully!\n"
           end
 
           private

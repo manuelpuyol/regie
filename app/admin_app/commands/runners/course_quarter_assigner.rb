@@ -6,6 +6,7 @@ require './registration/fetchers/existing_courses'
 require './registration/presenters/existing_courses'
 require './registration/fetchers/available_quarters'
 require './registration/presenters/available_quarters'
+require './db/errors/record_not_found'
 
 module App
   module AdminApp
@@ -39,6 +40,10 @@ module App
             @email = @logger.get
 
             create
+
+            @logger.print "\n\nCreated successfully!\n"
+          rescue DB::Errors::RecordNotFound => e
+            @logger.print e.message
           end
 
           private
@@ -71,7 +76,7 @@ module App
             Administration::CourseSectionCreator.new(
               course_id: selected_course.id,
               quarter_id: selected_quarter.id,
-              professor_email: email
+              professor_email: @email
             ).call
           end
         end
