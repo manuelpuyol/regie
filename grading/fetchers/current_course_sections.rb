@@ -4,13 +4,13 @@ require_relative '../current_professor_singleton'
 
 module Grading
   module Fetchers
-    class CurrentCourses
+    class CurrentCourseSections
       def initialize
         @professor = CurrentProfessorSingleton.instance.get
       end
 
       def call
-        @professor.current_courses
+        @professor.current_course_sections
       end
     end
   end

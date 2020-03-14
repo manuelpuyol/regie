@@ -12,10 +12,10 @@ module Grading
       course_sections.map(&:course)
     end
 
-    def current_courses
+    def current_course_sections
       course_sections.select do |section|
         section.quarter.active?
-      end.map(&:course)
+      end
     end
   end
 end
