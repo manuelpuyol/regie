@@ -13,6 +13,7 @@ module App
             @logger.print "\n==============================================\n\n"
             @logger.print "Here are the available commands you may use:\n\n"
             @logger.print "#{cmd(:login)} - starts login procedure"
+            @logger.print "#{cmd(:pass)} - change your user password"
             @logger.print "#{cmd(:quit)} - quits the application"
             @logger.print "#{cmd(:help)} - prints this help message\n\n"
           end
