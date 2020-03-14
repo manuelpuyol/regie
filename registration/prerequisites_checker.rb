@@ -9,9 +9,20 @@ module Registration
       @student = CurrentStudentSingleton.instance.get
     end
 
-    # TODO: Actually check prerequisites
     def call
-      true
+      return true if prerequisite_ids.empty?
+
+      (prerequisite_ids & completed_ids).size == prerequisite_ids.size
+    end
+
+    private
+
+    def prerequisite_ids
+      @course.prerequisites.map(&:id)
+    end
+
+    def completed_ids
+      @student.completed_courses.map(&:id)
     end
   end
 end

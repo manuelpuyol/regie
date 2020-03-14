@@ -11,6 +11,12 @@ module Registration
       student_sections.map(&:course_section).map(&:course)
     end
 
+    def completed_courses
+      student_sections.select do |section|
+        section.grade != 'F' && !section.nil?
+      end.map(&:course)
+    end
+
     def current_courses
       student_sections.map(&:course_section).select do |section|
         section.quarter.active?

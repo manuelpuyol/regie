@@ -3,25 +3,48 @@
 require './registration/prerequisites_checker'
 
 RSpec.describe Registration::PrerequisitesChecker do
-  let(:mock_course) { instance_double('Course') }
-  let(:mock_student) { instance_double('Student') }
+  let(:mock_student) { create(:user, :student) }
+  let(:course) { create(:course) }
+  let(:quarter) { create(:quarter) }
+  let(:prereq_course) { create(:course) }
+  let(:prereq_section) { create(:course_section, quarter_id: quarter.id, course_id: prereq_course.id) }
 
-  before do
-    allow(Registration::CurrentStudentSingleton).to receive_message_chain(:instance, :get).and_return(mock_student)
-  end
+  subject { described_class.new(course: course).call }
+
+  include_context 'mock a student'
 
   describe '#call' do
-    let(:courses) { [instance_double('Course'), instance_double('Course'), instance_double('Course')] }
-    subject { described_class.new(course: mock_course).call }
+    context 'when student attended all prerequisites' do
+      let!(:prerequisite) { create(:prerequisite, course_id: course.id, prerequisite_id: prereq_course.id) }
+      let!(:student_section) { create(:student_section, quarter: quarter, section_id: prereq_section.id, grade: grade, student_id: mock_student.id) }
 
-    context 'when student completed all prerequisites' do
-      xit 'should return true' do
+      context 'whem student hasnt failed any' do
+        let(:grade) { 'A' }
+
+        it 'should return true' do
+          expect(subject).to be true
+        end
+      end
+
+      context 'whem student failed some' do
+        let(:grade) { 'F' }
+
+        it 'should return false' do
+          expect(subject).to be false
+        end
+      end
+    end
+
+    context 'when course does not have any prerequisites' do
+      it 'should return true' do
         expect(subject).to be true
       end
     end
 
-    context 'when student completed has a missing prerequisite' do
-      xit 'should return false' do
+    context 'when student is missing a prerequisite' do
+      let!(:prerequisite) { create(:prerequisite, course_id: course.id, prerequisite_id: prereq_course.id) }
+
+      it 'should return false' do
         expect(subject).to be false
       end
     end
