@@ -35,6 +35,9 @@ module App
 
             @logger.print "\nSelected => #{quarters_view[@quarter_idx]}"
 
+            @logger.print "\nProfessor email:"
+            @email = @logger.get
+
             create
           end
 
@@ -67,7 +70,8 @@ module App
           def create
             Administration::CourseSectionCreator.new(
               course_id: selected_course.id,
-              quarter_id: selected_quarter.id
+              quarter_id: selected_quarter.id,
+              professor_email: email
             ).call
           end
         end
