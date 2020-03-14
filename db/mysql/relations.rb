@@ -11,25 +11,16 @@ module DB
       def self.included(base)
         base.class_eval do
           extend ClassMethods
-
           self.relations = {}
         end
       end
 
       module ClassMethods
-        def relations
-          @@relations
-        end
-
-        def relations=(val)
-          @@relations = val # rubocop:disable Style/ClassVars
-        end
-
         def belongs_to(name, klass:, polymorphic: false, foreign_key: nil)
           add_relation(name, type: :belongs_to, klass: klass, polymorphic: polymorphic, foreign_key: foreign_key)
 
           define_method(name) do
-            relation = self.class.relations[name]
+            relation = relations[self.class.name][name]
 
             return instance_variable_get(relation[:variable_name]) if instance_variable_get(relation[:variable_name])
 
@@ -42,7 +33,7 @@ module DB
           add_relation(name, type: :has_many, klass: klass, foreign_key: foreign_key, dependent: dependent)
 
           define_method(name) do
-            relation = self.class.relations[name]
+            relation = relations[self.class.name][name]
 
             return instance_variable_get(relation[:variable_name]) if instance_variable_get(relation[:variable_name])
 
@@ -50,7 +41,7 @@ module DB
           end
 
           define_method("#{name}_count") do
-            relation = self.class.relations[name]
+            relation = relations[self.class.name][name]
             count_variable = "#{relation[:variable_name]}_count"
 
             return instance_variable_get(count_variable) if instance_variable_get(count_variable)
@@ -63,7 +54,9 @@ module DB
         private
 
         def add_relation(name, type:, klass:, foreign_key: nil, polymorphic: false, dependent: nil)
-          relations[name] = {
+          relations[self.name] = {} if relations[self.name].nil?
+
+          relations[self.name][name] = {
             type: RELATION_TYPES[type],
             klass: klass,
             table_name: klass&.table_name,

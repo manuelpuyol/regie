@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/inflector'
+require "active_support/core_ext/class/attribute"
 require_relative 'queries/all'
 require_relative 'queries/create'
 require_relative 'queries/destroy'
@@ -13,6 +14,8 @@ module DB
   module MySQL
     class Record
       attr_accessor :id
+      class_attribute :relations, instance_writer: false
+
       include Relations
 
       def initialize(attrs = {})
