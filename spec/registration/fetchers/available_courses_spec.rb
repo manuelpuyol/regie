@@ -12,6 +12,10 @@ RSpec.describe Registration::Fetchers::AvailableCourses do
   describe '#call' do
     subject { described_class.new.call }
 
+    before do
+      allow(Registration::CurrentQuarterSingleton).to receive_message_chain(:instance, :get).and_return(current_quarter)
+    end
+
     it 'returns the list of courses in the current quarter' do
       expect(subject).to eq(current_courses.map(&:course))
     end
