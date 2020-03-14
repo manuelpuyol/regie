@@ -8,7 +8,7 @@ RSpec.describe Registration::Presenters::Grade do
     let(:mock_student_section) { instance_double('StudentSection', grade: 'B', course: mock_course) }
     subject { described_class.new(mock_student_section).call }
 
-    it 'returns a list of the courses names' do
+    it 'returns the course with grade' do
       expect(subject).to eq('MPCS 1 - 1 => B')
     end
   end
