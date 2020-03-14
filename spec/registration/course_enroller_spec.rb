@@ -9,6 +9,10 @@ RSpec.describe Registration::CourseEnroller do
 
   include_context 'mock a student'
 
+  before do
+    allow(Registration::CurrentQuarterSingleton).to receive_message_chain(:instance, :get).and_return(course_section.quarter)
+  end
+
   describe '#call' do
     subject { described_class.new(course: course).call }
 
