@@ -26,11 +26,11 @@ Project description [here](https://classes.cs.uchicago.edu/archive/2020/winter/5
 6. As a student, I want to see my grades :heavy_check_mark:
   1. Must print all past grades, divided by quarter :heavy_check_mark:
 
-7. As a professor, I want to see my current courses
+7. As a professor, I want to see my current courses :heavy_check_mark:
   1. Must show building/room assignment
 
-8. As a professor, I want to see my current students
-  1. Must show a list of students per current course
+8. As a professor, I want to see my current students :heavy_check_mark:
+  1. Must show a list of students per current course :heavy_check_mark:
 
 9. As a professor, I want to grade a student
   1. Must be able to create a grade
